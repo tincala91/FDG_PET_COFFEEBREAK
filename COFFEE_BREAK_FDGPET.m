@@ -39,8 +39,8 @@
 function COFFEE_BREAK_FDGPET()
 
 global baseDir
-baseDir='C:\Users\asala\Desktop\SCRIPT'; 
-%%***please replace C:\Users\asala\Desktop\SCRIPT with the path to the script folder!***
+baseDir='CHANGEMEPLEASE'; 
+%%***please replace CHANGEMEPLEASE with the path to the script folder!***
 
 
 %selects the directory containing only dicoms 
@@ -49,7 +49,7 @@ cd(dir_dicom);
 clear dir_dicom;
 save baseDir;
 
-%extract SUV value from DICOM infos, import dicom and compute SUV image;
+%extract SUV value from DICOM infos, import dicom;
 %saves patients info
 run('A_SUV_COMP.m')
 
@@ -61,11 +61,6 @@ run('C_COREG_script.m')
 %normalizes image to template and smooths
 run('D_NORMA_script.m')
 
-%extract mean SUV in the GM of the wSUV image
-%saves SUV information and computes mean SUV decrease (compared to
-%controls)
-run('E_SUV_GM_script.m')
-
 %compares swSUV image to HC, then saves results of hypo and pres contrasts
 run('F_STAT_script.m')
 
@@ -75,6 +70,18 @@ run('G_percent_regions.m');
 run('G_percent_lobes.m');
 run('G_percent_networks.m');
 run('G_percent_language.m');
+
+%compute SUV image;
+run('H_SUV_WRITE.m')
+
+%normalizes image to template and smooths
+run('I_NORMA_script.m')
+
+%extract mean SUV in the GM of the wSUV image
+%saves SUV information and computes mean SUV decrease (compared to
+%controls)
+run('E_SUV_GM_script.m')
+
 
 clear all
 
