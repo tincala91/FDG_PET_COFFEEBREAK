@@ -1,7 +1,9 @@
 
-%SINGLE SUBJECT FDG_PET IN THE CLINICS. Author: Arianna Sala
+%COFFE_BREAK_FDGPET SCRIPT TO DERIVE SINGLE SUBJECT FDG_PET RESULTS IN THE CLINICS
+%Authors: Arianna Sala (ULIEGE, CHU), Andreas Schindele (Universitätsklinikum Augsburg) 
+%Contributors: Claire Bernard (CHU Liege; SUV_computation); Chris Rordern (USC; nii_setOriginCOM)
 
-% The script allows to obtain with a single click and starting from the patient's original DICOM images 
+%The script allows to obtain with a single click and starting from the patient's original DICOM images 
 %(i) an estimate of the average reduction of the patient's brain GM metabolism; 
 %(ii) single-subject maps of relative hypometabolism vs. preserved metabolism; 
 %(iii) a standardized report on the topography of hypometabolism and preserved metabolism at regional and network level.
@@ -12,12 +14,6 @@
 
 %1) THE DIRECTORY "SCRIPT" WITHIN THE COFFEE_BREAK_FDGPET FOLDER  NEEDS TO BE ADDED TO THE MATLAB
 %PATH. CLICK HOME>SET PATH>ADD WITH SUBFOLDERS, THEN SELECT THE SCRIPT FOLDER ON YOUR COMPUTER
-
-%2) OPEN THE SCRIPT COFFEE_BREAK_FDGPET.m IN MATLAB AND REPLACE 'CHANGEMEPLEASE'AT LINE 42 WITH THE PATH TO
-%THE SCRIPT FOLDER ON YOU COMPUTER (the folder where you downloaded the SCRIPT folder), e.g. C:\Tpol\Desktop\COMA\SCRIPT
-
-%3) OPEN THE STAT_script_job.m IN SCRIPT\JOB_FILES AND DO THE SAME (use the "Find" function in Matlab to
-%replace every CHANGEMEPLEASE in one click)
 
 %DONE!!! NOW THE SCRIPT IS READY TO RUN. FROM NOW ON YOU WILL JUST HAVE TO TYPEE COFFE_BREAK_FDGPET AND
 %PRESS ENTER IN MATLAB EVERY TIME YOU WANT TO RUN THE SCRIPT. 
@@ -35,13 +31,9 @@
 %register on github first, then send me an email with your usarname to get
 %access - arianna.sala@uliege.be)
 
-
-function COFFEE_BREAK_FDGPET()
-
 global baseDir
-baseDir='CHANGEMEPLEASE'; 
-%%***please replace CHANGEMEPLEASE with the path to the script folder!***
-
+full_path = mfilename('fullpath')
+[baseDir, fn, e] = fileparts(full_path)
 
 %selects the directory containing only dicoms 
 dir_dicom = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
@@ -63,6 +55,8 @@ run('D_NORMA_script.m')
 
 %compares swSUV image to HC, then saves results of hypo and pres contrasts
 run('F_STAT_script.m')
+run('F_STAT_script_addon.m')
+
 
 %extract and saves info on topography of hypometabolism and of preserved
 %regions
@@ -80,9 +74,7 @@ run('I_NORMA_script.m')
 %extract mean SUV in the GM of the wSUV image
 %saves SUV information and computes mean SUV decrease (compared to
 %controls)
+%creates render in MRIcron style
 run('E_SUV_GM_script.m')
 
-
 clear all
-
-end
