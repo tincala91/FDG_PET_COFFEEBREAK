@@ -2,13 +2,13 @@
 global baseDir
 global subj_code
 dir_dicom=pwd;
-smoothedImg=strcat(dir_dicom,'\','swcounts_',subj_code,'.nii');
-rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC\render_spm96.mat');
+smoothedImg=strcat(dir_dicom,'/','swcounts_',subj_code,'.nii');
+rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
 
 % List of open inputs
 % Results Report: Select SPM.mat - cfg_files
 nrun = 1; % enter the number of runs here
-jobfile = cellstr(fullfile(baseDir,'JOB_FILES\STAT_script_addon_job.m'));
+jobfile = cellstr(fullfile(baseDir,'JOB_FILES/STAT_script_addon_job.m'));
 jobs = repmat(jobfile, 1, nrun);
 inputs = cell(1, nrun);
 for crun = 1:nrun

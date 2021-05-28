@@ -84,7 +84,7 @@ allDicom=char(allDicom);
 % DICOM Import: DICOM files - cfg_files
 % DICOM Import: Output directory - cfg_files
 nrun = 1; % enter the number of runs here
-jobfile=cellstr(fullfile(baseDir,'JOB_FILES\DICOM_IMP_job.m'));
+jobfile=cellstr(fullfile(baseDir,'JOB_FILES/DICOM_IMP_job.m'));
 jobs = repmat(jobfile, 1, nrun);
 inputs = cell(2, nrun);
 for crun = 1:nrun
@@ -108,7 +108,7 @@ list_nifti=dir('*.nii');
 %change name to match patient's record
   subj_code=[FN.FamilyName(1:2), FN.GivenName(1:2),'_',num2str(DN),'_',num2str(DE)];
   COUNTfile = list_nifti.name;
-  renamedCOUNTfile=strcat(dir_dicom,'\','counts_',subj_code,'.nii');
+  renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
   copyfile(COUNTfile, renamedCOUNTfile);
       
   clearvars -except subj_code 

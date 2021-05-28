@@ -7,11 +7,11 @@
 global baseDir
 global subj_code
 dir_dicom=pwd;
-renamedCOUNTfile=strcat(dir_dicom,'\','counts_',subj_code,'.nii');
-templateFDG=fullfile(baseDir,'MASK_TEMPLATES_HC\TemplateCtac8_8_2011.img');
+renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
+templateFDG=fullfile(baseDir,'MASK_TEMPLATES_HC/TemplateCtac8_8_2011.img');
 
 nrun = 1; % enter the number of runs here
-jobfile = cellstr(fullfile(baseDir,'JOB_FILES\COREG_job.m'));
+jobfile = cellstr(fullfile(baseDir,'JOB_FILES/COREG_job.m'));
 jobs = repmat(jobfile, 1, nrun);
 inputs = cell(2, nrun);
 
