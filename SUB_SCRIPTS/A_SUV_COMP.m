@@ -12,10 +12,28 @@ global SPM8_Bqperml_SUV
 
 %% Sélectio\n des fichiers à analyser
 dir_dicom=pwd
-defaultFileName=fullfile(dir_dicom,'*.dcm');
-list_dicom=dir(dir_dicom)
-list_dicom=list_dicom(3:length(list_dicom))
-firstDicom=list_dicom(1).name;
+%defaultFileName=fullfile(dir_dicom,'*.dcm');
+list_dicom=dir(dir_dicom);
+list_dicom=list_dicom(3:end)
+
+
+name_dicom = strings(length(list_dicom));
+values = zeros(length(list_dicom));
+for i=1:length(list_dicom)
+    list_dicom(i).name
+    if ~list_dicom(i).isdir 
+        if isdicom(list_dicom(i).name)
+            name_dicom(i) = list_dicom(i).name;
+            values(i) = 1;
+        end
+    end
+end
+
+name_dicom = name_dicom(logical(values));
+    
+
+
+firstDicom=name_dicom(1);
 if isempty(firstDicom)
     % User clicked the Cancel button.
     return;
@@ -30,7 +48,12 @@ if isfield(FN,'GivenName')==0
     FN.GivenName='  ';
 end
 DN=info.PatientBirthDate;
-Unite=info.Units;
+Unite=info.Units
+
+if ~strcmp(Unite, 'BQML')
+    error('The Unit is not BQML')
+    return
+end
 %DE=info.InstanceCreationDate;
 DE=info.AcquisitionDate;
 weight = info.PatientWeight;
@@ -108,7 +131,9 @@ spm_jobman('run', jobs, inputs{:});
 
 %move dicom in a dedicated folder, to keep a bit of order
 mkdir DICOM
-movefile('*.dcm','DICOM');
+for i=1:length(name_dicom)
+    movefile(name_dicom(i),'DICOM');
+end
 
 %CHANGE FILE NAME TO NIFTI
 
