@@ -23,7 +23,9 @@
 %declaring useful variables
 global baseDir
 global subj_code
-dir_dicom=pwd;
+global dir_dicom
+
+%dir_dicom=pwd;
 normImg=fullfile(strcat(dir_dicom,'/','wSUV_',subj_code,'.nii'));
 ROI_file = fullfile(baseDir,'MASK_TEMPLATES_HC/MNI_grey_Mask.nii');
 

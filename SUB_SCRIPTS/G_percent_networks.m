@@ -14,7 +14,9 @@ function percent_networks()
         %'maxpeak' :             (for 'peak' level only): maximum number of peaks per cluster
         
 global baseDir
-dir_dicom=pwd; 
+global dir_dicom
+
+%dir_dicom=pwd; 
 baseDirRender=fullfile(baseDir,'ROIs');   
            
         rex_source_hypo=fullfile(dir_dicom,'spmT_0001_Hypo.nii');

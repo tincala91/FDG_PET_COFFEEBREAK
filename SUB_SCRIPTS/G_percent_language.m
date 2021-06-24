@@ -15,7 +15,9 @@ function percent_language()
         
 %declaring useful variables
 global baseDir
-dir_dicom=pwd;
+global dir_dicom
+
+%dir_dicom=pwd;
 baseDirRender=fullfile(baseDir,'ROIs');
            
         rex_source_hypo=fullfile(dir_dicom,'spmT_0001_Hypo.nii');

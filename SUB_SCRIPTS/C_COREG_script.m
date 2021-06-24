@@ -6,7 +6,9 @@
 %declaring useful variables
 global baseDir
 global subj_code
-dir_dicom=pwd;
+global dir_dicom
+
+%dir_dicom=pwd;
 renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
 templateFDG=fullfile(baseDir,'MASK_TEMPLATES_HC/TemplateCtac8_8_2011.img');
 

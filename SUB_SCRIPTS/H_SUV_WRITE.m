@@ -4,7 +4,9 @@ function H_SUV_WRITE()
 global baseDir
 global subj_code
 global SPM8_Bqperml_SUV
-dir_dicom=pwd;
+global dir_dicom
+
+%dir_dicom=pwd;
 
 renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
 

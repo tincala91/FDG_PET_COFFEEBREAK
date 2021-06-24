@@ -1,7 +1,9 @@
 %declaring useful variables
 global baseDir
 global subj_code
-dir_dicom=pwd;
+global dir_dicom
+
+%dir_dicom=pwd;
 smoothedImg=strcat(dir_dicom,'/','swcounts_',subj_code,'.nii');
 rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
 list_HC={(fullfile(baseDir,'MASK_TEMPLATES_HC/sws0042855A-207260-00001-000001.img'));
