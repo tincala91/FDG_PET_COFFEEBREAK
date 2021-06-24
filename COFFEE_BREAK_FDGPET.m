@@ -34,6 +34,8 @@
 global baseDir
 global dir_dicom
 
+addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
+
 full_path = mfilename('fullpath')
 [baseDir, fn, e] = fileparts(full_path)
 
@@ -79,4 +81,5 @@ run(fullfile(baseDir, 'SUB_SCRIPTS/I_NORMA_script.m'))
 %creates render in MRIcron style
 run(fullfile(baseDir, 'SUB_SCRIPTS/E_SUV_GM_script.m'))
 
+rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 clear all

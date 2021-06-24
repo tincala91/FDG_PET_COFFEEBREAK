@@ -13,6 +13,7 @@ global SPM8_Bqperml_SUV
 
 %% Sélectio\n des fichiers à analyser
 
+cd(dir_dicom)
 %dir_dicom=pwd
 %defaultFileName=fullfile(dir_dicom,'*.dcm');
 list_dicom=dir(dir_dicom);

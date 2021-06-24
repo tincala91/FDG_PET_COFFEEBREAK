@@ -17,6 +17,7 @@ function percent_language()
 global baseDir
 global dir_dicom
 
+cd(dir_dicom);
 %dir_dicom=pwd;
 baseDirRender=fullfile(baseDir,'ROIs');     
            

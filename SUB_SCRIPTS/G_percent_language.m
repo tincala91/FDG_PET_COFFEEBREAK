@@ -1,4 +1,4 @@
-function percent_language()
+function G_percent_language()
 
 %rex(SOURCES, ROIS, 'paramname1',paramvalue1,'paramname2',paramvalue2,...);
   %  permits the specification of additional parameters:
@@ -17,6 +17,7 @@ function percent_language()
 global baseDir
 global dir_dicom
 
+cd(dir_dicom);
 %dir_dicom=pwd;
 baseDirRender=fullfile(baseDir,'ROIs');
            

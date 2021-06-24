@@ -7,7 +7,7 @@ global SPM8_Bqperml_SUV
 global dir_dicom
 
 %dir_dicom=pwd;
-
+cd(dir_dicom);
 renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
 
 % List of open inputs

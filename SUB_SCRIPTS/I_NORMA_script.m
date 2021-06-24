@@ -9,8 +9,9 @@ global baseDir
 global subj_code
 global dir_dicom
 
+cd(fullfile(dir_dicom, 'SUV'))
 %dir_dicom=pwd;
-renamedSUVfile=strcat(dir_dicom,'/','SUV_',subj_code,'.nii');
+renamedSUVfile=strcat(dir_dicom,'/','SUV/SUV_',subj_code,'.nii');
 
 jobfile = cellstr(fullfile(baseDir,'JOB_FILES/NORMA_script_job.m'));
 jobs = repmat(jobfile, 1, nrun);

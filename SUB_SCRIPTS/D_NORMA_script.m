@@ -9,6 +9,7 @@ global baseDir
 global subj_code
 global dir_dicom
 
+cd(dir_dicom);
 %dir_dicom=pwd;
 renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
 
