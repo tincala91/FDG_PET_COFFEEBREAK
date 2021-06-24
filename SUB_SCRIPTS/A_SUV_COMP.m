@@ -12,11 +12,30 @@ global subj_code
 global SPM8_Bqperml_SUV
 
 %% Sélectio\n des fichiers à analyser
+
 %dir_dicom=pwd
-defaultFileName=fullfile(dir_dicom,'*.dcm');
-list_dicom=dir(dir_dicom)
-list_dicom=list_dicom(3:length(list_dicom))
-firstDicom=list_dicom(1).name;
+%defaultFileName=fullfile(dir_dicom,'*.dcm');
+list_dicom=dir(dir_dicom);
+list_dicom=list_dicom(3:end)
+
+
+name_dicom = strings(length(list_dicom));
+values = zeros(length(list_dicom));
+for i=1:length(list_dicom)
+    list_dicom(i).name
+    if ~list_dicom(i).isdir 
+        if isdicom(list_dicom(i).name)
+            name_dicom(i) = list_dicom(i).name;
+            values(i) = 1;
+        end
+    end
+end
+
+name_dicom = name_dicom(logical(values));
+    
+
+
+firstDicom=name_dicom(1);
 if isempty(firstDicom)
     % User clicked the Cancel button.
     return;
@@ -31,13 +50,18 @@ if isfield(FN,'GivenName')==0
     FN.GivenName='  ';
 end
 DN=info.PatientBirthDate;
-Unite=info.Units;
+Unite=info.Units
+
+if ~strcmp(Unite, 'BQML')
+    error('The Unit is not BQML')
+    return
+end
 %DE=info.InstanceCreationDate;
 DE=info.AcquisitionDate;
-Poids=info.PatientWeight;
-Dose=info.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose/1000000.0;
-HeureMesure=info.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime;
-HeureExam=info.SeriesTime;
+weight = info.PatientWeight;
+Dose=info.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose;
+HeureMesure=str2double(info.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime);
+HeureExam=str2double(info.SeriesTime);
 
 if info.RescaleIntercept~=0
     printf('RescaleItercept non nul ',info.RescaleIntercept)
@@ -46,10 +70,22 @@ strcat(FN.FamilyName,'-',FN.GivenName, ' née :  ', num2str(DN))
 
 strcat('Date Examen :  ',num2str(DE),' à :',num2str(HeureExam),' ; unité :  ',Unite)
 
-strcat('Poids : ',num2str(Poids),' kg ;', num2str(Dose),' MBq mesuré à :',num2str(HeureMesure))
+strcat('Poids : ',num2str(weight),' kg ;', num2str(Dose),' MBq mesuré à :',num2str(HeureMesure))
 
-SPM8_Bqperml_SUV=info.Private_7053_1000/info.RescaleSlope
-[info.RescaleSlope;info.Private_7053_1000]
+hours_mes = floor(HeureMesure/1e4);
+min_mes = floor((HeureMesure - hours_mes*1e4)/1e2);
+sec_mes = HeureMesure - hours_mes*1e4 - min_mes*1e2;
+
+hours_exa = floor(HeureExam/1e4);
+min_exa = floor((HeureExam - hours_exa*1e4)/1e2);
+sec_exa = HeureExam - hours_exa*1e4 - min_exa*1e2;
+
+Time_difference = (hours_exa*3600 + min_exa*60 + sec_exa - hours_mes*3600 - min_mes*60 - sec_mes);
+decay_dose = Dose * 2^(-(Time_difference/6586.2));
+scaling_factor = weight * 1000 / decay_dose;
+
+SPM8_Bqperml_SUV = scaling_factor;
+[info.RescaleSlope;scaling_factor]
 
 %save basic data in a summary xls file
 Surname=convertCharsToStrings(FN.FamilyName);
@@ -58,15 +94,14 @@ Date_of_birth=convertCharsToStrings(DN);
 Date_of_PET=convertCharsToStrings(DE);
 Time_of_PET=convertCharsToStrings(HeureExam);
 Unit=convertCharsToStrings(Unite);
-Weight=convertCharsToStrings(Poids);
+Weight=convertCharsToStrings(weight);
 Unit_Weight=convertCharsToStrings('kg');
 Dose=convertCharsToStrings(Dose);
 Time_Measurement_Dose=convertCharsToStrings(HeureMesure);
-Rescale_Slope=convertCharsToStrings(info.RescaleSlope);
-Private=convertCharsToStrings(info.Private_7053_1000);
+%Private=convertCharsToStrings(info.Private_7053_1000);
 SUVparam_Imcalc=convertCharsToStrings(SPM8_Bqperml_SUV);
 
-SUV_info=table(Surname, Name, Date_of_birth, Date_of_PET, Time_of_PET, Unit, Weight,Unit_Weight,Dose,Time_Measurement_Dose,Rescale_Slope,Private, SUVparam_Imcalc);
+SUV_info=table(Surname, Name, Date_of_birth, Date_of_PET, Time_of_PET, Unit, Weight,Unit_Weight,Dose,Time_Measurement_Dose, SUVparam_Imcalc);
 
 writetable(SUV_info,'1_PET_info.xlsx');
 
@@ -98,7 +133,9 @@ spm_jobman('run', jobs, inputs{:});
 
 %move dicom in a dedicated folder, to keep a bit of order
 mkdir DICOM
-movefile('*.dcm','DICOM');
+for i=1:length(name_dicom)
+    movefile(name_dicom(i),'DICOM');
+end
 
 %CHANGE FILE NAME TO NIFTI
 
