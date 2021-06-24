@@ -32,49 +32,51 @@
 %access - arianna.sala@uliege.be)
 
 global baseDir
+global dir_dicom
+
 full_path = mfilename('fullpath')
 [baseDir, fn, e] = fileparts(full_path)
 
 %selects the directory containing only dicoms 
 dir_dicom = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
-cd(dir_dicom);
-clear dir_dicom;
+%cd(dir_dicom);
+%clear dir_dicom;
 save baseDir;
 
 %extract SUV value from DICOM infos, import dicom;
 %saves patients info
-run('A_SUV_COMP.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/A_SUV_COMP.m'))
 
 %automatically sets the origin in the anterior commissure (please check
 %that the image is co-registered to the template!
-run('B_nii_setOriginCOM.m')
-run('C_COREG_script.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/B_nii_setOriginCOM.m'))
+run(fullfile(baseDir, 'SUB_SCRIPTS/C_COREG_script.m'))
 
 %normalizes image to template and smooths
-run('D_NORMA_script.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/D_NORMA_script.m'))
 
 %compares swSUV image to HC, then saves results of hypo and pres contrasts
-run('F_STAT_script.m')
-run('F_STAT_script_addon.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/F_STAT_script.m'))
+run(fullfile(baseDir, 'SUB_SCRIPTS/F_STAT_script_addon.m'))
 
 
 %extract and saves info on topography of hypometabolism and of preserved
 %regions
-run('G_percent_regions.m');
-run('G_percent_lobes.m');
-run('G_percent_networks.m');
-run('G_percent_language.m');
+run(fullfile(baseDir, 'SUB_SCRIPTS/G_percent_regions.m'));
+run(fullfile(baseDir, 'SUB_SCRIPTS/G_percent_lobes.m'));
+run(fullfile(baseDir, 'SUB_SCRIPTS/G_percent_networks.m'));
+run(fullfile(baseDir, 'SUB_SCRIPTS/G_percent_language.m'));
 
 %compute SUV image;
-run('H_SUV_WRITE.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/H_SUV_WRITE.m'))
 
 %normalizes image to template and smooths
-run('I_NORMA_script.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/I_NORMA_script.m'))
 
 %extract mean SUV in the GM of the wSUV image
 %saves SUV information and computes mean SUV decrease (compared to
 %controls)
 %creates render in MRIcron style
-run('E_SUV_GM_script.m')
+run(fullfile(baseDir, 'SUB_SCRIPTS/E_SUV_GM_script.m'))
 
 clear all

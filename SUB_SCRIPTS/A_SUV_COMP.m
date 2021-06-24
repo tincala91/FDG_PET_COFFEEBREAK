@@ -7,11 +7,12 @@ function A_SUV_COMP()
 
 %declaring useful variables
 global baseDir
+global dir_dicom
 global subj_code
 global SPM8_Bqperml_SUV
 
 %% Sélectio\n des fichiers à analyser
-dir_dicom=pwd
+%dir_dicom=pwd
 defaultFileName=fullfile(dir_dicom,'*.dcm');
 list_dicom=dir(dir_dicom)
 list_dicom=list_dicom(3:length(list_dicom))
