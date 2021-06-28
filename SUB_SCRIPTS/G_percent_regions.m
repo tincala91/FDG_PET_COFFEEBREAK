@@ -34,7 +34,8 @@ baseDirRender=fullfile(baseDir,'ROIs');
         
         ex_file=fullfile(baseDirRender,'percent_regions.xlsx');
         copyfile(ex_file,dir_dicom);
-        xlswrite('percent_regions.xlsx',Counts,'C2:E120');
+        writematrix(Counts,'percent_regions.xlsx','Range','C2:E120')
+        %xlswrite('percent_regions.xlsx',Counts,'C2:E120');
 
 end
         

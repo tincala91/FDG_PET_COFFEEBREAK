@@ -45,7 +45,8 @@ baseDirRender=fullfile(baseDir,'ROIs');
         
         ex_file=fullfile(baseDirRender,'percent_language.xlsx');
         copyfile(ex_file,dir_dicom);
-        xlswrite('percent_language.xlsx',Counts,'B2:D8');
+        writematrix(Counts,'percent_language.xlsx','Range','B2:D8')
+        %xlswrite('percent_language.xlsx',Counts,'B2:D8');
 
 end
         
