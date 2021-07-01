@@ -60,9 +60,11 @@ spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),1,rendFile,1)
-export_fig 'Hypo_render.jpg'
+saveas(gcf, 'Hypo_render.jpg');
+%export_fig 'Hypo_render.jpg'
 
 rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
 spm_figure('colormap','gray-cool')
-export_fig 'Hypo_render_old.jpg'
+saveas(gcf, 'Hypo_render_old.jpg');
+%export_fig 'Hypo_render_old.jpg'

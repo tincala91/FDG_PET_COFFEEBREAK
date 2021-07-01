@@ -1,4 +1,4 @@
-function varargout = spm_render(dat,brt,rendfile)
+function varargout = spm_render_mod(dat,brt,rendfile,color)
 % Render blobs on surface of a 'standard' brain
 % FORMAT spm_render(dat,brt,rendfile)
 %
@@ -36,7 +36,6 @@ function varargout = spm_render(dat,brt,rendfile)
 % $Id: spm_render.m 7577 2019-04-24 08:59:56Z guillaume $
 
 SVNrev = '$Rev: 7577 $';
-
 global prevrend
 if ~isstruct(prevrend)
     prevrend = struct('rendfile','', 'brt',[], 'col',[]);
@@ -53,11 +52,13 @@ if nargin < 3
     if isempty(prevrend.rendfile)   
         spm('FnBanner',mfilename,SVNrev);
         [rendfile, sts] = spm_select(1,{'mat','mesh'},'Render file');
-        if ~sts, return; end     
+        if ~sts, return; end
+    else
+        rendfile=prevrend.rendfile;
     end
-else
-    prevrend.rendfile = rendfile;
 end
+
+prevrend.rendfile = rendfile;
 
 ext = spm_file(rendfile,'ext');
 loadgifti = false;
@@ -165,24 +166,36 @@ if nargin < 2
         else
             col = [];
         end
-    elseif isfinite(brt) && isempty(prevrend.col)
+    elseif isfinite(prevrend.brt) && isempty(prevrend.col)
+        brt = prevrend.brt;
         col = eye(3);
-    elseif isfinite(brt)  % don't need to check prevrend.col again
+    elseif isfinite(prevrend.brt)  % don't need to check prevrend.col again
+        brt = prevrend.brt;
         col = prevrend.col;
     else
+        brt = prevrend.brt;
         col = [];
     end
 else
-    if isfinite(brt) && isempty(prevrend.col)
-        col = eye(3);
-    elseif isfinite(brt)  % don't need to check prevrend.col again
-        col = prevrend.col;
+    if isfinite(brt)
+        if color == 0
+            col = eye(3);
+        else
+            col = [0,0,1;0,1,0;1,0,0];
+        end
     else
         col = [];
     end
-    prevrend.brt = brt;
-    prevrend.col = col;
 end
+
+% if color == 0
+%     col = hot(256);
+% elseif color == 1
+%     col = cool(256);
+% end
+
+prevrend.brt = brt;
+prevrend.col = col;
 %-Perform the rendering
 %==========================================================================
 spm('Pointer','Watch');
@@ -259,7 +272,7 @@ for j=1:length(dat)
             else
                 dst = xyz(3,:) - z1(msk);
                 dst = max(dst,0);
-                t0  = t(msk).*exp((log(0.5)/10)*dst)';
+                t0  = t(msk).*exp((log(0.5)/10)*dst);
             end
             X0  = full(sparse(round(xyz(1,:)), round(xyz(2,:)), t0, d2(1), d2(2)));
             hld = 1; if ~isfinite(brt), hld = 0; end
@@ -346,6 +359,7 @@ else
 
         rgb{i} = zeros([size(ren) 3]);
         tmp = ren.*max(1-X{1}-X{2}-X{3},0);
+        col
         for k = 1:3
             rgb{i}(:,:,k) = tmp + X{1}*col(1,k) + X{2}*col(2,k) +X{3}*col(3,k);
         end
