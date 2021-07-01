@@ -27,7 +27,7 @@ saveas(gcf, 'Pres_render.jpg');
 rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
 %export_fig 'Pres_render_old.jpg'
-saveas(gcf, 'Pres_render.jpg');
+saveas(gcf, 'Pres_render_old.jpg');
 
 hypo_nii = strcat(dir_dicom, '/spmT_0001_Hypo.nii');
 pres_nii = strcat(dir_dicom, '/spmT_0002_Pres.nii');
