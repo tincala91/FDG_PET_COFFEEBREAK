@@ -18,10 +18,17 @@ function coivox = nii_setOriginCOM(vols)
 
 %declaring useful variables
 global subj_code
-global dir_dicom
+global dir_pat
 
-%dir_dicom=pwd;
-renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
+%dir_pat=pwd;
+cd(dir_pat);
+  
+  COUNTfile=strcat(dir_pat,'/','counts_',subj_code,'.nii');
+  mkdir SPM;
+  movefile (COUNTfile, 'SPM');
+  cd(fullfile (dir_pat,'SPM'));
+  renamedCOUNTfile=strcat(dir_pat,'/','SPM','/','counts_',subj_code,'.nii');
+  
 
 spm_jobman('initcfg');
 if ~exist('vols','var') %no files specified

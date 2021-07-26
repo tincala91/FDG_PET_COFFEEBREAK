@@ -169,7 +169,6 @@ defstruct = struct('img', [], ...
     'printfile', 'slices.ps');
 
 others = [];
-imgs = '/home/uka/Schindele/SPM-Project/spm12/canonical/single_subj_T1.nii';
 V=params
 imgs2 = V;
 
@@ -178,17 +177,17 @@ o = slover;
 
 o.cbar = [];
 
-o.img(1).vol = spm_vol (imgs);
+o.img(1).vol = spm_vol (imgs2(1,:));
 o.img(1).type = 'truecolour';
 o.img(1).cmap = gray;
 [mx mn] = slover('volmaxmin',o.img.vol);
 o.img(1).range = [mn mx];
 
-o.img(2).vol = spm_vol (imgs2(1,:));
+o.img(2).vol = spm_vol (imgs2(2,:));
 o.img(2).type = 'split';
 o.img(2).range = [1.69 6];
 o.img(2).cmap= winter;
-o.img(3).vol = spm_vol (imgs2(2,:));
+o.img(3).vol = spm_vol (imgs2(3,:));
 o.img(3).type = 'split';
 o.img(3).range = [1.69 6];
 o.img(3).cmap= hot;
@@ -201,7 +200,7 @@ o.slices = -42:4:78;
 
 o = paint(o);
 
-saveas(gcf,'Axial.jpg')
+saveas(gcf,'Render_slover_multislice.jpg')
 close all
 return
 

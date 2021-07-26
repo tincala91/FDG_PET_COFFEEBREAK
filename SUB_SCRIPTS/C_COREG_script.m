@@ -6,11 +6,10 @@
 %declaring useful variables
 global baseDir
 global subj_code
-global dir_dicom
+global dir_pat
 
-cd(dir_dicom);
-%dir_dicom=pwd;
-renamedCOUNTfile=strcat(dir_dicom,'/','counts_',subj_code,'.nii');
+cd(fullfile (dir_pat,'SPM'));
+renamedCOUNTfile=strcat(dir_pat,'/','SPM','/','counts_',subj_code,'.nii');
 templateFDG=fullfile(baseDir,'MASK_TEMPLATES_HC/TemplateCtac8_8_2011.img');
 
 nrun = 1; % enter the number of runs here
@@ -25,5 +24,5 @@ end
 spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
-spm_check_registration(renamedCOUNTfile,templateFDG);
-saveas(gcf,sprintf('2_SET_ORIGIN_COREG.png'),'bmp') ;
+spm_check_registration(templateFDG,renamedCOUNTfile);
+saveas(gcf,sprintf('SET_ORIGIN_COREG.png'),'bmp') ;
