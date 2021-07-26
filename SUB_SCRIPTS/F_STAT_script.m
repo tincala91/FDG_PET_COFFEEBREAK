@@ -59,6 +59,12 @@ for crun = 1:nrun
 spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
-spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',   xSPM.Z','mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile);
-spm_figure('colormap', 'gray-cool'); %change colormaps to cool for hypo
-saveas(gcf, 'Hypo_render.jpg'); %saves render as jpeg (get current figure!)
+spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),1,rendFile,1)
+saveas(gcf, 'Hypo_render.jpg');
+%export_fig 'Hypo_render.jpg'
+
+rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
+spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
+spm_figure('colormap','gray-cool')
+saveas(gcf, 'Hypo_render_old.jpg');
+%export_fig 'Hypo_render_old.jpg'

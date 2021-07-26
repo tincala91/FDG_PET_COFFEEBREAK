@@ -53,7 +53,8 @@ baseDirRender=fullfile(baseDir,'ROIs');
         
         ex_file=fullfile(baseDirRender,'percent_lobes.xlsx');
         copyfile(ex_file,dir_dicom);
-        xlswrite('percent_lobes.xlsx',Counts,'B2:D15');
+        writematrix(Counts,'percent_lobes.xlsx','Range','B2:D15')
+        %xlswrite('percent_lobes.xlsx',Counts,'B2:D15');
 
 end
         

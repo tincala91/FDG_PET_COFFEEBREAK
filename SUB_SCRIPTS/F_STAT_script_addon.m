@@ -20,5 +20,16 @@ end
 spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
-spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',   xSPM.Z ,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile);
-saveas(gcf, 'Pres_render.jpg'); %saves render as jpeg (get current figure!)
+spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',   xSPM.Z ,'mat', xSPM.M,'dim', xSPM.DIM),1,rendFile,0);
+%export_fig 'Pres_render.jpg'; %saves render as jpeg (get current figure!)
+saveas(gcf, 'Pres_render.jpg');
+
+rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat');
+spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
+%export_fig 'Pres_render_old.jpg'
+saveas(gcf, 'Pres_render_old.jpg');
+
+hypo_nii = strcat(dir_dicom, '/spmT_0001_Hypo.nii');
+pres_nii = strcat(dir_dicom, '/spmT_0002_Pres.nii');
+
+slover_singlesubj_DOC_ax([hypo_nii; pres_nii])

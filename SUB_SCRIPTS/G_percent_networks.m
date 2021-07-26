@@ -34,7 +34,8 @@ baseDirRender=fullfile(baseDir,'ROIs');
         
         ex_file=fullfile(baseDirRender,'percent_networks.xlsx');
         copyfile(ex_file,dir_dicom);
-        xlswrite('percent_networks.xlsx',Counts,'B2:D6');
+        writematrix(Counts,'percent_networks.xlsx','Range','B2:D6')
+        %xlswrite('percent_networks.xlsx',Counts,'B2:D6');
 
 end
         
