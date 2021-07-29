@@ -1,4 +1,4 @@
-function coivox = nii_setOriginCOM(vols)
+function coivox = B_nii_setOriginCOM(vols)
 
 %Sets position and orientation of input image(s) to match SPM's templates
 %  SPM's normalize function uses the origin as a starting estimate

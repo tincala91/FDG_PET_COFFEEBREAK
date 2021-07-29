@@ -30,6 +30,7 @@
 
 global baseDir
 global dir_pat
+global Correct_unit
 
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
@@ -67,17 +68,20 @@ run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_lobes.m'));
 run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_networks.m'));
 run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_language.m'));
 
-%compute SUV image;
-run(fullfile(baseDir, 'SUB_SCRIPTS/G_SUV_WRITE.m'))
 
-%normalizes image to template and smooths
-run(fullfile(baseDir, 'SUB_SCRIPTS/H_NORMA_script.m'))
+if Correct_unit
+    %compute SUV image;
+    run(fullfile(baseDir, 'SUB_SCRIPTS/G_SUV_WRITE.m'))
 
-%extract mean SUV in the GM of the wSUV image
-%saves SUV information and computes mean SUV decrease (compared to
-%controls)
-%creates render in MRIcron style
-run(fullfile(baseDir, 'SUB_SCRIPTS/I_SUV_GM_script.m'))
+    %normalizes image to template and smooths
+    run(fullfile(baseDir, 'SUB_SCRIPTS/H_NORMA_script.m'))
+
+    %extract mean SUV in the GM of the wSUV image
+    %saves SUV information and computes mean SUV decrease (compared to
+    %controls)
+    %creates render in MRIcron style
+    run(fullfile(baseDir, 'SUB_SCRIPTS/I_SUV_GM_script.m'))
+end
 
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))

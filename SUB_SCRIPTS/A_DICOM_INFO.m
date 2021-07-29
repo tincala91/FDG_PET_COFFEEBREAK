@@ -3,16 +3,18 @@
 
 %NOTE: THIS WORKS ONLY FOR FDG_PET IMAGES ACQUIRED WITH THE CHU SCANNER(Gemini TF CT scanner (Philips Medical Systems)
 
-function A_SUV_COMP()
+function A_DICOM_INFO()
 
 %declaring useful variables
 global baseDir
 global dir_pat
 global subj_code
 global SPM8_Bqperml_SUV
+global Correct_unit
 
 %% Sélectio\n des fichiers à analyser
 
+Correct_unit = 1;
 cd(dir_pat);
 save baseDir;
 %dir_pat=pwd
@@ -55,8 +57,8 @@ DN=info.PatientBirthDate;
 Unite=info.Units;
 
 if ~strcmp(Unite, 'BQML');
-    error('The Unit is not BQML');
-    return
+    Correct_unit = 0;
+    warning('The Unit is not BQML. SUV will not be calculated');
 end
 %DE=info.InstanceCreationDate;
 DE=info.AcquisitionDate;
@@ -102,8 +104,11 @@ Dose=convertCharsToStrings(Dose);
 Time_Measurement_Dose=convertCharsToStrings(HeureMesure);
 %Private=convertCharsToStrings(info.Private_7053_1000);
 SUVparam_Imcalc=convertCharsToStrings(SPM8_Bqperml_SUV);
-
-SUV_info=table(Surname, Name, Date_of_birth, Date_of_PET, Time_of_PET,Weight,Unit_Weight,Dose,Unit,Time_Measurement_Dose, SUVparam_Imcalc);
+if Correct_unit
+    SUV_info=table(Surname, Name, Date_of_birth, Date_of_PET, Time_of_PET,Weight,Unit_Weight,Dose,Unit,Time_Measurement_Dose, SUVparam_Imcalc);
+else
+    SUV_info=table(Surname, Name, Date_of_birth, Date_of_PET, Time_of_PET,Weight,Unit_Weight,Dose,Unit,Time_Measurement_Dose);
+end
 
 writetable(SUV_info,'PET_info.xlsx');
 
