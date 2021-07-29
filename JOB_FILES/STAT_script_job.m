@@ -40,5 +40,5 @@ matlabbatch{4}.spm.stats.results.conspec.extent = 0;
 matlabbatch{4}.spm.stats.results.conspec.conjunction = 1;
 matlabbatch{4}.spm.stats.results.conspec.mask.none = 1;
 matlabbatch{4}.spm.stats.results.units = 1;
-matlabbatch{4}.spm.stats.results.print = 'jpg';
+matlabbatch{4}.spm.stats.results.print = '';
 matlabbatch{4}.spm.stats.results.write.tspm.basename = 'Hypo';

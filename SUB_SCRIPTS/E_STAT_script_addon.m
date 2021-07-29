@@ -18,14 +18,15 @@ for crun = 1:nrun
 end
 spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
+export_fig 'Pres.jpg'
 
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',   xSPM.Z ,'mat', xSPM.M,'dim', xSPM.DIM),1,rendFile,0);
-%export_fig 'Pres_render_new.jpg'; %saves render as jpeg (get current figure!)
-saveas(gcf, 'Render_pres_new.jpg');
+export_fig 'Render_pres_new.jpg'; %saves render as jpeg (get current figure!)
+%saveas(gcf, 'Render_pres_new.jpg');
 
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
-%export_fig 'Pres_render_old.jpg'
-saveas(gcf, 'Render_pres_old.jpg');
+export_fig 'Render_pres_old.jpg'
+%saveas(gcf, 'Render_pres_old.jpg');
 
 template_T1= strcat(baseDir,'/MASK_TEMPLATES_HC/single_subj_T1.nii');
 hypo_nii = strcat(dir_pat,'/SPM/spmT_0001_Hypo.nii');
