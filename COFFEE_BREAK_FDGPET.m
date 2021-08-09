@@ -34,6 +34,7 @@ global Correct_unit
 
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
+addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
 
 full_path = mfilename('fullpath')
 [baseDir, fn, e] = fileparts(full_path)
@@ -85,4 +86,5 @@ end
 
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
+rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
 clear all

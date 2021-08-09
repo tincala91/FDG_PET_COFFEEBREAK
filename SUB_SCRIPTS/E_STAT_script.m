@@ -57,13 +57,14 @@ for crun = 1:nrun
     end
 spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
+export_fig 'Hypo.jpg'
 
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),1,rendFile,1)
-saveas(gcf, 'Render_hypo_new.jpg');
-%export_fig 'Hypo_render.jpg'
+%saveas(gcf, 'Render_hypo_new.jpg');
+export_fig 'Render_hypo_new.jpg'
 
 %rendFile=fullfile(baseDir,'MASK_TEMPLATES_HC/render_spm96.mat'); %%%
 spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,rendFile)
 spm_figure('colormap','gray-cool')
-saveas(gcf, 'Render_hypo_old.jpg');
-%export_fig 'Hypo_render_old.jpg'
+%saveas(gcf, 'Render_hypo_old.jpg');
+export_fig 'Render_hypo_old.jpg'
