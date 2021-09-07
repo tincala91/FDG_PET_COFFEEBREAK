@@ -14,7 +14,6 @@ list_HC={(fullfile(baseDir,'MASK_TEMPLATES_HC/sws0042855A-207260-00001-000001.im
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/sws0502130L-831340-00001-000001.img'));
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/sws0582584R-898820-00001-000001.img'));
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/sws0625676B-306400-00001-000001.img'));
-                                                            (fullfile(baseDir,'MASK_TEMPLATES_HC/sws3310574Q-58250-00001-000001.img'));
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/sws6031272L-14440-00001-000001.img'));
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/sws6254700X-582150-00001-000001.img'));
                                                             (fullfile(baseDir,'MASK_TEMPLATES_HC/swsGERA2900065-95220-00001-000001.img'));
