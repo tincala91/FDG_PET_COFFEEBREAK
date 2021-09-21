@@ -1,5 +1,10 @@
 # FDG_PET_COFFEEBREAK
-Coffee break script to optimize FDG-PET analyses in disorders of consciousness;
 
-Together with the uploaded folders and script, another folder called MASK_TEMPLATES_HC needs to be present in the main folder, containing additional files for the script to run
-The folder is present on the Y in the Y:\_SHARE_\Research\CONS\CSG\SHARE\1-DATASETS\COFFEE_BREAK_FDGPET and backup in Arianna's PC C:\Users\asala\Desktop\COMA_SCIENCE_GROUP\FDG_CLINICA\SCRIPT
+Coffee break script to optimize FDG-PET analyses in disorders of consciousness.
+
+Together with the uploaded folders and script, the nifti files of 33HC have to be added to the MASK_TEMPLATES_HC for the script to run. 
+These files can be downloaded from: https://search.kg.ebrains.eu/live/minds/core/dataset/v1.0.0/68a61eab-7ba9-47cf-be78-b9addd64bb2f
+
+Please note that the script should be run by experienced users and quality checks should be performed after the script has run; please refer to the material available here for more information: https://indico.giga.uliege.be/e/FDG-PET-2021
+
+
