@@ -25,10 +25,10 @@ list_dicom=list_dicom(3:end);
 
 name_dicom = strings(length(list_dicom));
 values = zeros(length(list_dicom));
-for i=1:length(list_dicom);
+for i=1:length(list_dicom)
     list_dicom(i).name ;
-    if ~list_dicom(i).isdir ;
-        if isdicom(list_dicom(i).name) ;
+    if ~list_dicom(i).isdir 
+        if isdicom(list_dicom(i).name) 
             name_dicom(i) = list_dicom(i).name;
             values(i) = 1;
         end
@@ -40,7 +40,7 @@ name_dicom = name_dicom(logical(values));
 
 
 firstDicom=name_dicom(1);
-if isempty(firstDicom);
+if isempty(firstDicom)
     % User clicked the Cancel button.
     return;
 end
@@ -50,16 +50,13 @@ fullFileName=cellstr(fullfile(dir_pat,firstDicom));
 info=dicominfo(fullFileName{1});
 
 FN=info.PatientName; 
-if isfield(FN,'GivenName')==0;
+if isfield(FN,'GivenName')==0
     FN.GivenName='  ';
 end
 DN=info.PatientBirthDate;
 Unite=info.Units;
 
-if ~strcmp(Unite, 'BQML');
-    Correct_unit = 0;
-    warning('The Unit is not BQML. SUV will not be calculated');
-end
+
 %DE=info.InstanceCreationDate;
 DE=info.AcquisitionDate;
 weight = info.PatientWeight;
@@ -88,6 +85,14 @@ Time_difference = (hours_exa*3600 + min_exa*60 + sec_exa - hours_mes*3600 - min_
 decay_dose = Dose * 2^(-(Time_difference/6586.2));
 scaling_factor = weight * 1000 / decay_dose;
 
+if ~strcmp(Unite, 'BQML')
+    if isfield(info, 'Private_7053_1000')==0
+        Correct_unit = 0;
+        warning('The Unit is not BQML. SUV will not be calculated');
+    else
+        scaling_factor = info.Private_7053_1000/info.RescaleSlope;
+    end
+end
 SPM8_Bqperml_SUV = scaling_factor;
 [info.RescaleSlope;scaling_factor];
 
