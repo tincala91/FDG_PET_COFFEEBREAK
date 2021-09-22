@@ -1,7 +1,15 @@
 
 %COFFE_BREAK_FDGPET SCRIPT TO DERIVE SINGLE SUBJECT FDG_PET RESULTS IN THE CLINICS
-%Authors: Arianna Sala (ULIEGE, CHU), Andreas Schindele (Universitätsklinikum Augsburg) 
-%Contributors: Claire Bernard (CHU Liege; SUV_computation); Chris Rordern (USC; nii_setOriginCOM)
+%Authors: Arianna Sala (ULIEGE, CHULiege), Andreas Schindele (Universitätsklinikum Augsburg) 
+%Contributors: 
+% Mohamed Ali Bahri (ULIEGE; extraction of global SUV); 
+% Claire Bernard (CHULiege; extraction of dicom information and computation of SUV images);
+% Matthew Brett, John Ashburner (SPM render functions);
+% Jøger Hansegård (isdicom function);
+% Chris Rordern (USC; setting origin script); 
+% Jimmy Shen (nifti functions from TFCE toolbox);
+% Oliver J. Woodford, Yair M. Altman (figure export function);
+% REX toolbox was obtained from https://web.mit.edu/swg/software.htm
 
 %The script allows to obtain with a single click and starting from the patient's original DICOM images 
 %(i) an estimate of the average reduction of the patient's brain GM metabolism; 
