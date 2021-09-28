@@ -7,5 +7,5 @@ These files can be downloaded from: https://search.kg.ebrains.eu/live/minds/core
 
 Please note that the script should be run by experienced users and quality checks should be performed afterwards; please refer to the material available here for more information: https://indico.giga.uliege.be/e/FDG-PET-2021
 
-Note: this is a preliminary version of the script that still has to extensively tested on different scanners.
+Note: this is a preliminary version of the script that still has to be extensively tested on different scanners.
 
