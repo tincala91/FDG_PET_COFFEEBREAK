@@ -1,5 +1,6 @@
 function flag = isdicom(fileName)
 %ISDICOM True for dicom files
+%https://it.mathworks.com/matlabcentral/fileexchange/11431-isdicom %
 %
 %   ISDICOM(FILENAME) returns logical true (1) if the file is a dicom file, 
 %   and false (0) otherwise. 
@@ -20,6 +21,7 @@ function flag = isdicom(fileName)
 %       non-standard DICOM files might not contain this string. 
 %       Please see the newsgroup discussion on <a href="matlab:web('http://newsreader.mathworks.com/WebX/.eef9353?50@474.0yR7b5yCHQl@', '-browser')">isDICOM() function</a>
 
+% this file was retrieved from 
 %% AUTHOR    : Jøger Hansegård
 %% $DATE     : 13-Jun-2006 14:16:35 $
 %% $Revision : 1.00 $

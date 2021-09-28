@@ -46,6 +46,8 @@
 
 % version 2.1
 
+% this file was retrieved from https://web.mit.edu/swg/software.htm %
+
 function varargout=rex(ImgF, roi_path_array, varargin);
 
 if nargin>0, % COMMAND-LINE OPTIONS

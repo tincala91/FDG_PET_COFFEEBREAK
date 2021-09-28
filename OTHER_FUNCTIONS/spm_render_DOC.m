@@ -32,6 +32,9 @@ function varargout = spm_render_mod(dat,brt,rendfile,color)
 %__________________________________________________________________________
 % Copyright (C) 1996-2019 Wellcome Trust Centre for Neuroimaging
 
+% this file was modified from the spm_render function within SPM12
+% (https://www.fil.ion.ucl.ac.uk/spm/software/download/) %
+
 % John Ashburner
 % $Id: spm_render.m 7577 2019-04-24 08:59:56Z guillaume $
 

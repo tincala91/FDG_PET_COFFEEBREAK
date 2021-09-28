@@ -147,6 +147,9 @@ function [o, others] = slover_singlesubj_DOC_ax(params, others, varargin)
 %
 % $Id: slover.m,v 1.2 2005/05/06 22:59:56 matthewbrett Exp $
 
+% this file was modified from the slover function within SPM12
+% (https://www.fil.ion.ucl.ac.uk/spm/software/download/) %
+
 myclass = 'slover';
 
 % Default object structure
