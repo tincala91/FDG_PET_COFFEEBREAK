@@ -26,9 +26,6 @@
 %2) CHANGE DIRECTORY TO THE SCRIPT FOLDER AND TYPE 'COFFEE_BREAK_FDG" IN
 %THE COMMAND PROMPT; PRESS ENTER
 
-%THE SCRIPT WILL JUST ASK YOU TO SELECT THE FOLDER WITH THE DICOM FILES OF THE PATIENT.
-%ONLY DICOM FILES MUST BE IN THE FOLDER, NOTHING ELSE!
-
 %Please note that the script should be run by experienced users and quality checks should be performed after the script has run; 
 %please refer to the material available here for more information:
 %https://indico.giga.uliege.be/e/FDG-PET-2021, talks by Jitka Annen
