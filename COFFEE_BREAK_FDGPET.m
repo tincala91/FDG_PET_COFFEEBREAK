@@ -1,6 +1,8 @@
 
 %COFFE_BREAK_FDGPET SCRIPT TO DERIVE SINGLE SUBJECT FDG_PET RESULTS IN THE CLINICS
+
 %Authors: Arianna Sala (ULIEGE, CHULiege), Andreas Schindele (Universitätsklinikum Augsburg) 
+
 %Contributors: 
 % Mohamed Ali Bahri (ULIEGE; extraction of global SUV); 
 % Claire Bernard (CHULiege; extraction of dicom information and computation of SUV images);
@@ -30,8 +32,6 @@
 %please refer to the material available here for more information:
 %https://indico.giga.uliege.be/e/FDG-PET-2021, talks by Jitka Annen
 %(Quality Check) and Andreas Schindele
-
-
 
 global baseDir
 global dir_pat
