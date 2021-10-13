@@ -14,36 +14,34 @@ global Correct_unit
 
 %% Sélectio\n des fichiers à analyser
 
+fprintf('Analysing directory %s\n', dir_pat);
+
 Correct_unit = 1;
 cd(dir_pat);
 save baseDir;
-%dir_pat=pwd
-%defaultFileName=fullfile(dir_pat,'*.dcm');
 list_dicom=dir(dir_pat);
-list_dicom=list_dicom(3:end);
 
-
-name_dicom = strings(length(list_dicom));
-values = zeros(length(list_dicom));
+name_dicom = cell(length(list_dicom), 1);
+values = zeros(length(list_dicom), 1);
 for i=1:length(list_dicom)
-    list_dicom(i).name ;
-    if ~list_dicom(i).isdir 
-        if isdicom(list_dicom(i).name) 
-            name_dicom(i) = list_dicom(i).name;
-            values(i) = 1;
-        end
+    if list_dicom(i).isdir 
+      continue;
+    end
+
+    if isdicom(list_dicom(i).name) 
+        name_dicom{i} = list_dicom(i).name;
+        values(i) = 1;
     end
 end
 
 name_dicom = name_dicom(logical(values));
-    
-
 
 firstDicom=name_dicom(1);
 if isempty(firstDicom)
     % User clicked the Cancel button.
     return;
 end
+
 %% Lecture des données
 fullFileName=cellstr(fullfile(dir_pat,firstDicom));
 
