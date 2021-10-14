@@ -18,7 +18,6 @@ fprintf('Analysing directory %s\n', dir_pat);
 
 Correct_unit = 1;
 cd(dir_pat);
-save baseDir;
 list_dicom=dir(dir_pat);
 
 name_dicom = cell(length(list_dicom), 1);
@@ -36,24 +35,23 @@ end
 
 name_dicom = name_dicom(logical(values));
 
-firstDicom=name_dicom(1);
-if isempty(firstDicom)
-    % User clicked the Cancel button.
-    return;
+if isempty(name_dicom)
+  error('Folder %s don''t contain valid dicom files', baseDir);
 end
 
-%% Lecture des données
-fullFileName=cellstr(fullfile(dir_pat,firstDicom));
+firstDicom=name_dicom{1};
 
-info=dicominfo(fullFileName{1});
+%% Lecture des données
+fullFileName=fullfile(dir_pat,firstDicom);
+
+info=dicominfo(fullFileName);
 
 FN=info.PatientName; 
-if isfield(FN,'GivenName')==0
+if ~isfield(FN,'GivenName')
     FN.GivenName='  ';
 end
 DN=info.PatientBirthDate;
 Unite=info.Units;
-
 
 %DE=info.InstanceCreationDate;
 DE=info.AcquisitionDate;
@@ -63,13 +61,13 @@ HeureMesure=str2double(info.RadiopharmaceuticalInformationSequence.Item_1.Radiop
 HeureExam=str2double(info.SeriesTime);
 
 if info.RescaleIntercept~=0
-    printf('RescaleItercept non nul ',info.RescaleIntercept)
+    fprintf('RescaleItercept == %f; not null', info.RescaleIntercept)
 end
-strcat(FN.FamilyName,'-',FN.GivenName, ' née :  ', num2str(DN))
 
-strcat('Date Examen :  ',num2str(DE),' à :',num2str(HeureExam),' ; unité :  ',Unite)
-
-strcat('Poids : ',num2str(weight),' kg ;', num2str(Dose), num2str(Unite), ' mesuré à :',num2str(HeureMesure))
+fprintf('Patient: %s-%s, born %s\n', FN.FamilyName, FN.GivenName, num2str(DN));
+fprintf('Exam: %s at %s; unit: %s\n', num2str(DE), num2str(HeureExam), Unite);
+fprintf('Weight: %s kg;\n', num2str(weight));
+fprintf('Dose: %s %s, measured at %s\n', num2str(Dose), num2str(Unite), num2str(HeureMesure));
 
 hours_mes = floor(HeureMesure/1e4);
 min_mes = floor((HeureMesure - hours_mes*1e4)/1e2);
@@ -84,15 +82,14 @@ decay_dose = Dose * 2^(-(Time_difference/6586.2));
 scaling_factor = weight * 1000 / decay_dose;
 
 if ~strcmp(Unite, 'BQML')
-    if isfield(info, 'Private_7053_1000')==0
+    if isfield(info, 'Private_7053_1000')
+        scaling_factor = info.Private_7053_1000/info.RescaleSlope;
+    else
         Correct_unit = 0;
         warning('The Unit is not BQML. SUV will not be calculated');
-    else
-        scaling_factor = info.Private_7053_1000/info.RescaleSlope;
     end
 end
 SPM8_Bqperml_SUV = scaling_factor;
-[info.RescaleSlope;scaling_factor];
 
 %save basic data in a summary xls file
 Surname=convertCharsToStrings(FN.FamilyName);
@@ -117,14 +114,9 @@ writetable(SUV_info,'PET_info.xlsx');
 
 %DICOM IMPORT
 
-for i=1:length(list_dicom)
-nDicom=list_dicom(i).name;
-fullFileName=cellstr(fullfile(dir_pat,nDicom));
-allDicom(i)=fullFileName;
+for i=1:size(name_dicom, 1)
+  allDicom{i, 1} = fullfile(dir_pat, name_dicom{i});
 end
-
-allDicom=allDicom';
-allDicom=char(allDicom);
 
 % List of open inputs
 % DICOM Import: DICOM files - cfg_files
@@ -142,25 +134,29 @@ spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
 %move dicom in a dedicated folder, to keep a bit of order
-mkdir DICOM
-for i=1:length(name_dicom)
-    movefile(name_dicom(i),'DICOM');
+dicom_dir = fullfile(dir_pat, 'DICOM', '.');
+if ~exist(dicom_dir, 'dir')
+  mkdir(dicom_dir);
+end
+
+for i=1:size(allDicom, 1)
+    copyfile(allDicom{i, 1}, dicom_dir);
 end
 
 %CHANGE FILE NAME TO NIFTI
 
 %get nifti filename
 
-list_nifti=dir('*.nii');
+list_nifti=dir('s*.nii');
 
 %change name to match patient's record
-  subj_code=[FN.FamilyName(1:2), FN.GivenName(1:2),'_',num2str(DN),'_',num2str(DE)];
-  COUNTfile = list_nifti.name;
-  renamedCOUNTfile=strcat(dir_pat,'/','counts_',subj_code,'.nii');
-  copyfile(COUNTfile, renamedCOUNTfile);
-      
-  clearvars -except subj_code 
-  save subj_code
-  
+subj_code=[FN.FamilyName(1:2), FN.GivenName(1:2),'_',num2str(DN),'_',num2str(DE)];
+COUNTfile = list_nifti.name;
+renamedCOUNTfile = ['counts_' subj_code '.nii'];
+
+fprintf('Renaming file %s to %s\n', COUNTfile, renamedCOUNTfile);
+copyfile(COUNTfile, fullfile(dir_pat, renamedCOUNTfile));
+    
+end
   
   
