@@ -2,7 +2,7 @@
 % Coregister: Estimate: Reference Image - cfg_files
 % Coregister: Estimate: Source Image - cfg_files
 
-function C_COREG_script(files, template)
+function files = C_COREG_script(files, template)
   %declaring useful variables
   global JOB_DIR
 

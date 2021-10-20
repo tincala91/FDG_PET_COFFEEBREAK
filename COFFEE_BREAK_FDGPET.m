@@ -65,14 +65,14 @@ try
   %that the image is co-registered to the template!
   [fnames, coivox] = B_nii_setOriginCOM(fname);
 
-  C_COREG_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
+  fnames = C_COREG_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
 
   %normalizes image to template and smooths
-  D_NORMA_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
-  error('TEST')
+  fnames = D_NORMA_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
 
   %compares swSUV image to HC, then saves results of hypo and pres contrasts
   run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script.m'))
+  error('TEST')
   run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script_addon.m'))
 
 

@@ -16,4 +16,13 @@ function C_COREG_script(files, template)
   spm('defaults', 'PET');
   spm_jobman('run', jobs, inputs{:});
 
+  for iFile = 1:size(files,1)
+    [path, basename, ext] = fileparts(files{iFile});
+    % Need to be carefull if prefix 'sw' is not garanteed
+    files{iFile} = fullfile(path, ['sw' basename, ext]);
+    if ~exist(files{iFile}, 'file')
+      error('expected normalized file %s not found. Probably wron prefix', ...
+            files{iFile});
+    end
+  end
 end
