@@ -59,11 +59,12 @@ try
   %extract SUV value from DICOM infos, import dicom;
   %saves patients info
   %run(fullfile(baseDir, 'SUB_SCRIPTS', 'A_DICOM_INFO.m'));
-  A_DICOM_INFO(dir_path);
-  error('TEST')
+  [fname, scale] = A_DICOM_INFO(dir_path);
+
   %automatically sets the origin in the anterior commissure (please check
   %that the image is co-registered to the template!
   run(fullfile(baseDir, 'SUB_SCRIPTS/B_nii_setOriginCOM.m'))
+  error('TEST')
   run(fullfile(baseDir, 'SUB_SCRIPTS/C_COREG_script.m'))
 
   %normalizes image to template and smooths

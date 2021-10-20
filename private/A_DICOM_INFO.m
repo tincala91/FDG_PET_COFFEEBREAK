@@ -3,12 +3,10 @@
 
 %NOTE: THIS WORKS ONLY FOR FDG_PET IMAGES ACQUIRED WITH THE CHU SCANNER(Gemini TF CT scanner (Philips Medical Systems)
 
-function A_DICOM_INFO(dir_path, nrun)
+function [sub_file, scale] = A_DICOM_INFO(dir_path, nrun)
 
 %declaring useful variables
 global JOB_DIR
-global subj_code
-global SPM8_Bqperml_SUV
 
 %% Sélectio\n des fichiers à analyser
 
@@ -38,6 +36,7 @@ if isempty(name_dicom)
 end
 
 sub_info = get_sub_info(name_dicom{1});
+scale = sub_info.scale;
 
 writetable(sub_info.table,fullfile(dir_path, 'PET_info.xlsx'));
 
@@ -82,9 +81,10 @@ end
 %change name to match patient's record
 COUNTfile = list_nifti.name;
 renamedCOUNTfile = ['counts_' sub_info.code '.nii'];
+sub_file = fullfile(dir_path, renamedCOUNTfile);
 
 fprintf('Renaming file %s to %s\n', COUNTfile, renamedCOUNTfile);
-movefile(fullfile(dir_path, COUNTfile), fullfile(dir_path, renamedCOUNTfile));
+movefile(fullfile(dir_path, COUNTfile), sub_file);
     
 end
   
