@@ -36,6 +36,7 @@
 global JOB_DIR
 global TEMPLATE_DIR
 global Correct_unit
+global xSPM
 
 cur_dir = pwd();
 
