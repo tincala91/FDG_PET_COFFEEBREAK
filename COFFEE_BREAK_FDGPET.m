@@ -33,10 +33,8 @@
 %https://indico.giga.uliege.be/e/FDG-PET-2021, talks by Jitka Annen
 %(Quality Check) and Andreas Schindele
 
-global baseDir
 global JOB_DIR
 global TEMPLATE_DIR
-global dir_pat
 global Correct_unit
 
 cur_dir = pwd();
@@ -70,7 +68,7 @@ try
   C_COREG_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
 
   %normalizes image to template and smooths
-  run(fullfile(baseDir, 'SUB_SCRIPTS/D_NORMA_script.m'))
+  D_NORMA_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
   error('TEST')
 
   %compares swSUV image to HC, then saves results of hypo and pres contrasts
