@@ -71,7 +71,14 @@ try
   fnames = D_NORMA_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
 
   %compares swSUV image to HC, then saves results of hypo and pres contrasts
-  run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script.m'))
+  controls = spm_select('FPlist', 'data/HC_IMAGES/', '^sws.*\.img$');
+  if size(controls, 1) < 10
+    error('Found too little of HC images');
+  end
+
+  E_STAT_script(fnames, fullfile(baseDir, 'OTHER_FUNCTIONS', 'render_spm96.mat'), ...
+                fullfile(TEMPLATE_DIR, 'brainmask.nii'), ...
+                controls);
   error('TEST')
   run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script_addon.m'))
 

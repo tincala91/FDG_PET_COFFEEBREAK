@@ -1,4 +1,4 @@
-function C_COREG_script(files, template)
+function files = D_NORMA_script(files, template)
   global JOB_DIR
 
   files = cellstr(files);
