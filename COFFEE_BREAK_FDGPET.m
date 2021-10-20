@@ -35,6 +35,7 @@
 
 global baseDir
 global JOB_DIR
+global TEMPLATE_DIR
 global dir_pat
 global Correct_unit
 
@@ -44,6 +45,7 @@ full_path = mfilename('fullpath');
 [baseDir, fn, e] = fileparts(full_path);
 
 JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
+TEMPLATE_DIR = fullfile(baseDir, 'MASK_TEMPLATES_HC'); 
 
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
@@ -64,11 +66,12 @@ try
   %automatically sets the origin in the anterior commissure (please check
   %that the image is co-registered to the template!
   [fnames, coivox] = B_nii_setOriginCOM(fname);
-  run(fullfile(baseDir, 'SUB_SCRIPTS/C_COREG_script.m'))
-  error('TEST')
+
+  C_COREG_script(fnames, fullfile(TEMPLATE_DIR, 'TemplateCtac8_8_2011.img'));
 
   %normalizes image to template and smooths
   run(fullfile(baseDir, 'SUB_SCRIPTS/D_NORMA_script.m'))
+  error('TEST')
 
   %compares swSUV image to HC, then saves results of hypo and pres contrasts
   run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script.m'))
@@ -111,4 +114,5 @@ rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
 
 clear JOB_DIR;
+clear TEMPLATE_DIR;
 clear all
