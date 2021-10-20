@@ -34,6 +34,7 @@
 %(Quality Check) and Andreas Schindele
 
 global baseDir
+global JOB_DIR
 global dir_pat
 global Correct_unit
 
@@ -42,6 +43,8 @@ cur_dir = pwd();
 full_path = mfilename('fullpath');
 [baseDir, fn, e] = fileparts(full_path);
 
+JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
+
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
@@ -49,15 +52,15 @@ addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 %selects the directory containing only dicoms 
 % dir_pat = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
 
-dir_pat = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
+dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
 
 try 
 
   %extract SUV value from DICOM infos, import dicom;
   %saves patients info
   %run(fullfile(baseDir, 'SUB_SCRIPTS', 'A_DICOM_INFO.m'));
-  A_DICOM_INFO();
-
+  A_DICOM_INFO(dir_path);
+  error('TEST')
   %automatically sets the origin in the anterior commissure (please check
   %that the image is co-registered to the template!
   run(fullfile(baseDir, 'SUB_SCRIPTS/B_nii_setOriginCOM.m'))
@@ -105,4 +108,6 @@ end
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
 rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
+
+clear JOB_DIR;
 clear all
