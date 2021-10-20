@@ -63,9 +63,9 @@ try
 
   %automatically sets the origin in the anterior commissure (please check
   %that the image is co-registered to the template!
-  run(fullfile(baseDir, 'SUB_SCRIPTS/B_nii_setOriginCOM.m'))
-  error('TEST')
+  [fnames, coivox] = B_nii_setOriginCOM(fname);
   run(fullfile(baseDir, 'SUB_SCRIPTS/C_COREG_script.m'))
+  error('TEST')
 
   %normalizes image to template and smooths
   run(fullfile(baseDir, 'SUB_SCRIPTS/D_NORMA_script.m'))
