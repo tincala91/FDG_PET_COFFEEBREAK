@@ -34,7 +34,7 @@ function files = E_STAT_script_addon(spm_mat_file, render, template)
   %length; creating a matrix containing cells first, and then converting to
   %char
   images={template; hypo_nii; pres_nii};
-  slover_singlesubj_DOC_ax(char(images))
+  slover_singlesubj_DOC_ax(char(images));
 
   cd(cur_dir);
 
