@@ -41,6 +41,8 @@ global xSPM
 full_path = mfilename('fullpath');
 [baseDir, fn, e] = fileparts(full_path);
 
+cur_path = pwd();
+
 JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
 TEMPLATE_DIR = fullfile(baseDir, 'MASK_TEMPLATES_HC'); 
 
@@ -75,12 +77,14 @@ try
     error('Found too little of HC images');
   end
 
-  E_STAT_script(fnames, fullfile(baseDir, 'OTHER_FUNCTIONS', 'render_spm96.mat'), ...
+  render = fullfile(baseDir, 'OTHER_FUNCTIONS', 'render_spm96.mat');
+  spm_mat = E_STAT_script(...
+                fnames, render, ...
                 fullfile(TEMPLATE_DIR, 'brainmask.nii'), ...
                 controls);
+  E_STAT_script_addon(spm_mat, render,...
+                      fullfile(TEMPLATE_DIR, 'single_subj_T1.nii'));
   error('TEST')
-  run(fullfile(baseDir, 'SUB_SCRIPTS/E_STAT_script_addon.m'))
-
 
   %extract and saves info on topography of hypometabolism and of preserved
   %regions
@@ -108,6 +112,7 @@ catch ME
   rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
   rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
   rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
+  cd(cur_path);
   save('workspace_dump.m');
   rethrow(ME);
 end

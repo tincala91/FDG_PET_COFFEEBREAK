@@ -1,12 +1,12 @@
-function files = E_STAT_script(files, render, mask, controls)
+function mat_file = E_STAT_script(files, render, mask, controls)
   %declaring useful variables
   global JOB_DIR
-  global xSPM
 
   files = cellstr(files);
   controls = cellstr(controls);
 
   [pth, ~, ~] = fileparts(files{1});
+  cur_dir = pwd();
 
   % List of open inputs
   % Factorial design specification: Directory - cfg_files
@@ -23,18 +23,20 @@ function files = E_STAT_script(files, render, mask, controls)
   end
   spm('defaults', 'PET');
   spm_jobman('run', jobs, inputs{:});
+
+  mat_file = fullfile(pth, 'SPM.mat');
+
+  cd(pth);
   export_fig 'Hypo.jpg';
 
-  params.XYZ = xSPM.XYZ;
-  params.t = xSPM.Z;
-  params.mat = xSPM.M;
-  params.dim = xSPM.DIM;
-  spm_render_DOC(params, 1, render, 1);
+  spm_render_DOC(get_renderer(), 1, render, 1);
   %saveas(gcf, 'Render_hypo_new.jpg');
   export_fig 'Render_hypo_new.jpg';
 
-  spm_render_DOC(params, nan, render);
+  spm_render_DOC(get_renderer(), nan, render);
   spm_figure('colormap','gray-cool');
   %saveas(gcf, 'Render_hypo_old.jpg');
   export_fig 'Render_hypo_old.jpg';
+
+  cd(cur_dir);
 end
