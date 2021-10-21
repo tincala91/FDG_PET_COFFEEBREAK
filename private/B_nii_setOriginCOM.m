@@ -22,6 +22,10 @@ function [work_files, coivox] = B_nii_setOriginCOM(vols)
   work_dir = fullfile(path, 'SPM', '.');
   if ~exist(work_dir, 'dir')
     mkdir(work_dir);
+  else
+    warning('SPM folder exist, it will be replaced');
+    rmdir(work_dir, 's');
+    mkdir(work_dir);
   end
 
   work_files = {size(vols)};
