@@ -38,8 +38,6 @@ global TEMPLATE_DIR
 global Correct_unit
 global xSPM
 
-cur_dir = pwd();
-
 full_path = mfilename('fullpath');
 [baseDir, fn, e] = fileparts(full_path);
 
@@ -107,18 +105,17 @@ try
   end
 
 catch ME
-  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
-  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
-  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
-  cd(cur_dir);
-  save baseDir;
+  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
+  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
+  rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
+  save('workspace_dump.m');
   rethrow(ME);
 end
 
-rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
-rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
-rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
+rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
+rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
+rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 
 clear JOB_DIR;
 clear TEMPLATE_DIR;
-clear all
+clear xSPM
