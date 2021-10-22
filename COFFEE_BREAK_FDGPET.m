@@ -45,6 +45,7 @@ cur_path = pwd();
 
 JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
 TEMPLATE_DIR = fullfile(baseDir, 'MASK_TEMPLATES_HC'); 
+ROI_DIR = fullfile(baseDir, 'ROIs');
 
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
@@ -84,11 +85,16 @@ try
                 controls);
   E_STAT_script_addon(spm_mat, render,...
                       fullfile(TEMPLATE_DIR, 'single_subj_T1.nii'));
-  error('TEST')
 
   %extract and saves info on topography of hypometabolism and of preserved
   %regions
-  run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_regions.m'));
+  conditions = spm_select('FPlist', fullfile(dir_path, 'SPM'), ...
+                          '^spmT_[0-9]{4}_[0-9a-zA-Z]+\.nii$');
+  F_percent_regions(conditions, ...
+                    fullfile(dir_path, 'SPM', 'mask.nii'), ...
+                    fullfile(ROI_DIR, 'aal_all_regions.img'), ...
+                    fullfile(ROI_DIR, 'percent_regions.xlsx'));
+  error('TEST')
   run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_lobes.m'));
   run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_networks.m'));
   run(fullfile(baseDir, 'SUB_SCRIPTS/F_percent_language.m'));
