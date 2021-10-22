@@ -3,7 +3,7 @@
 
 %NOTE: THIS WORKS ONLY FOR FDG_PET IMAGES ACQUIRED WITH THE CHU SCANNER(Gemini TF CT scanner (Philips Medical Systems)
 
-function [sub_file, scale] = A_DICOM_INFO(dir_path, nrun)
+function [sub_file, sub_info] = A_DICOM_INFO(dir_path, nrun)
 
 %declaring useful variables
 global JOB_DIR

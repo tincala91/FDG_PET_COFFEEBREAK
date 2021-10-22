@@ -61,7 +61,7 @@ try
   %extract SUV value from DICOM infos, import dicom;
   %saves patients info
   %run(fullfile(baseDir, 'SUB_SCRIPTS', 'A_DICOM_INFO.m'));
-  [fname, scale] = A_DICOM_INFO(dir_path);
+  [fname, sub_info] = A_DICOM_INFO(dir_path);
 
   %automatically sets the origin in the anterior commissure (please check
   %that the image is co-registered to the template!
@@ -136,12 +136,12 @@ try
   F_percent(conditions, ...
             fullfile(dir_path, 'SPM', 'mask.nii'), ...
             regions, ...
-            fullfile(ROI_DIR, 'percent_lobes.xlsx'), ...
+            fullfile(ROI_DIR, 'percent_language.xlsx'), ...
             2, 'B');
 
   error('TEST')
 
-  if Correct_unit
+  if sub_info.correct_unit
       %compute SUV image;
       run(fullfile(baseDir, 'SUB_SCRIPTS/G_SUV_WRITE.m'))
 

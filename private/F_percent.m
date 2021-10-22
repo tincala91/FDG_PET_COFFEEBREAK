@@ -62,7 +62,7 @@ function F_percent(data, mask, rois, template_table, start_row, start_col)
       fprintf(f, '%d\t%s', i, roi);
       tmp = repmat('\t%d', 1, size(voxels, 1));
       fprintf(f, tmp, counts(i, 1:end-1));
-      fprintf(f, '\t%d', counts(i, 1:end));
+      fprintf(f, '\t%d', counts(i, end));
       tmp = repmat('\t%.2f', 1, size(voxels, 1));
       fprintf(f, tmp, 100 * counts(i, 1:end-1) ./ counts(i, end));
     fprintf(f, '\n');
