@@ -44,9 +44,9 @@ baseDirRender=fullfile(baseDir,'ROIs');
         rex_ROIs=char(rex_ROI1,rex_ROI2,rex_ROI3,rex_ROI4,rex_ROI5,rex_ROI6,rex_ROI7,rex_ROI8,rex_ROI9,rex_ROI10,rex_ROI11,rex_ROI12,rex_ROI13,rex_ROI14);
         
         
-        Tot_voxels_hypo=rex(rex_source_hypo,rex_ROIs,'summary_measure','count','level','clusters','output_type','none','gui',0,'select_clusters',0);
-        Tot_voxels_pres=rex(rex_source_pres,rex_ROIs,'summary_measure','count','level','clusters','output_type','none','gui',0,'select_clusters',0);
-        Tot_voxels_ROI=rex(rex_source_mask,rex_ROIs,'summary_measure','count','level','clusters','output_type','none','gui',0,'select_clusters',0);
+        Tot_voxels_hypo=rex(rex_source_hypo,rex_ROIs,'summary_measure','count','level','rois','output_type','none','gui',0,'select_clusters',0);
+        Tot_voxels_pres=rex(rex_source_pres,rex_ROIs,'summary_measure','count','level','rois','output_type','none','gui',0,'select_clusters',0);
+        Tot_voxels_ROI=rex(rex_source_mask,rex_ROIs,'summary_measure','count','level','rois','output_type','none','gui',0,'select_clusters',0);
         
         Counts=[Tot_voxels_hypo;Tot_voxels_pres;Tot_voxels_ROI];
         Counts=Counts';

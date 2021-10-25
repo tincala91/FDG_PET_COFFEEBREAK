@@ -37,12 +37,12 @@ global baseDir
 global dir_pat
 global Correct_unit
 
+full_path = mfilename('fullpath')
+[baseDir, fn, e] = fileparts(full_path)
+
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'))
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'))
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'))
-
-full_path = mfilename('fullpath')
-[baseDir, fn, e] = fileparts(full_path)
 
 %selects the directory containing only dicoms 
 dir_pat = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
