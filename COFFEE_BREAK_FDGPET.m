@@ -142,16 +142,16 @@ try
 
   if sub_info.correct_unit
       %compute SUV image;
-      run(fullfile(baseDir, 'SUB_SCRIPTS/G_SUV_WRITE.m'))
+      G_SUV_WRITE;
 
       %normalizes image to template and smooths
-      run(fullfile(baseDir, 'SUB_SCRIPTS/H_NORMA_script.m'))
+      H_NORMA_script;
 
       %extract mean SUV in the GM of the wSUV image
       %saves SUV information and computes mean SUV decrease (compared to
       %controls)
       %creates render in MRIcron style
-      run(fullfile(baseDir, 'SUB_SCRIPTS/I_SUV_GM_script.m'))
+      I_SUV_GM_script;
   end
 
 catch ME
