@@ -7,11 +7,11 @@ nrun = 1; % enter the number of runs here
 %declaring useful variables
 global baseDir
 global subj_code
-global dir_pat
+global dir_path
 
-cd(fullfile(dir_pat, 'SUV'))
+cd(fullfile(dir_path, 'SUV'))
 %dir_dicom=pwd;
-renamedSUVfile=strcat(dir_pat,'/','SUV/SUV_',subj_code,'.nii');
+renamedSUVfile=strcat(dir_path,'/','SUV/SUV_',subj_code,'.nii');
 
 jobfile = cellstr(fullfile(baseDir,'JOB_FILES/NORMA_script_job.m'));
 jobs = repmat(jobfile, 1, nrun);
