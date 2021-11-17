@@ -35,7 +35,6 @@
 
 global JOB_DIR
 global TEMPLATE_DIR
-global Correct_unit
 global xSPM
 
 full_path = mfilename('fullpath');
@@ -53,9 +52,9 @@ addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 
 %selects the directory containing only dicoms 
-% dir_pat = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
+dir_path = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
 
-dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
+% dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
 
 try 
 
@@ -144,16 +143,16 @@ try
 
   if sub_info.correct_unit
       %compute SUV image;
-      run(fullfile(baseDir, 'SUB_SCRIPTS/G_SUV_WRITE.m'))
+      G_SUV_WRITE;
 
       %normalizes image to template and smooths
-      run(fullfile(baseDir, 'SUB_SCRIPTS/H_NORMA_script.m'))
+      H_NORMA_script;
 
       %extract mean SUV in the GM of the wSUV image
       %saves SUV information and computes mean SUV decrease (compared to
       %controls)
       %creates render in MRIcron style
-      run(fullfile(baseDir, 'SUB_SCRIPTS/I_SUV_GM_script.m'))
+      I_SUV_GM_script;
   end
 
 catch ME
