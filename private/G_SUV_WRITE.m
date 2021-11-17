@@ -4,7 +4,7 @@ function H_SUV_WRITE()
 global baseDir
 global subj_code
 global SPM8_Bqperml_SUV
-global dir_pat
+global dir_path
 
 %dir_pat=pwd;
 cd(fullfile (dir_path,'SPM'));
