@@ -139,8 +139,6 @@ try
             fullfile(ROI_DIR, 'percent_language.xlsx'), ...
             2, 'B');
 
-  error('TEST')
-
   if sub_info.correct_unit
       %compute SUV image;
       G_SUV_WRITE;
