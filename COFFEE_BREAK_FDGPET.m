@@ -43,6 +43,7 @@ full_path = mfilename('fullpath');
 
 cur_path = pwd();
 
+
 JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
 TEMPLATE_DIR = fullfile(baseDir, 'MASK_TEMPLATES_HC'); 
 ROI_DIR = fullfile(baseDir, 'ROIs');
