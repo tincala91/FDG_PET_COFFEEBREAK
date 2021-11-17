@@ -23,11 +23,11 @@
 %declaring useful variables
 global baseDir
 global subj_code
-global dir_pat
+global dir_path
 
-cd(fullfile(dir_pat, 'SUV'))
+cd(fullfile(dir_path, 'SUV'))
 %dir_dicom=pwd;
-normImg=fullfile(strcat(dir_pat,'/','SUV/wSUV_',subj_code,'.nii'));
+normImg=fullfile(strcat(dir_path,'/','SUV/wSUV_',subj_code,'.nii'));
 ROI_file = fullfile(baseDir,'MASK_TEMPLATES_HC/MNI_grey_Mask.nii');
 
 %[ROI_file,status] = spm_select(1, 'image', 'Select the Grey matter mask ', [], pwd); %% spm
