@@ -35,7 +35,6 @@
 
 global JOB_DIR
 global TEMPLATE_DIR
-global Correct_unit
 global xSPM
 
 full_path = mfilename('fullpath');
