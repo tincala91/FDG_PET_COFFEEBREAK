@@ -51,9 +51,9 @@ addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 
 %selects the directory containing only dicoms 
-% dir_pat = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
+dir_path = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
 
-dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
+% dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
 
 try 
 
