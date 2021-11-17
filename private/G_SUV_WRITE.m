@@ -7,8 +7,8 @@ global SPM8_Bqperml_SUV
 global dir_pat
 
 %dir_pat=pwd;
-cd(fullfile (dir_pat,'SPM'));
-renamedCOUNTfile=strcat(dir_pat,'/','SPM','/','counts_',subj_code,'.nii');
+cd(fullfile (dir_path,'SPM'));
+renamedCOUNTfile=strcat(dir_path,'/','SPM','/','counts_',subj_code,'.nii');
 
 % List of open inputs
 % Image Calculator: Input Images - cfg_files
@@ -25,11 +25,11 @@ spm('defaults', 'PET');
 spm_jobman('run', jobs, inputs{:});
 
 
-  SUVfile = fullfile(dir_pat,'SPM','SUV.nii');
-  renamedSUVfile=strcat(dir_pat,'/','SPM','/','SUV_',subj_code,'.nii');
+  SUVfile = fullfile(dir_path,'SPM','SUV.nii');
+  renamedSUVfile=strcat(dir_path,'/','SPM','/','SUV_',subj_code,'.nii');
   copyfile(SUVfile, renamedSUVfile);
   delete(SUVfile);
-  cd(dir_pat)
+  cd(dir_path)
   mkdir SUV;
   movefile (renamedSUVfile, 'SUV'); 
   cd SUV;
