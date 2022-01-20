@@ -1,7 +1,4 @@
-function ViewSUV3D(filename)
-
-global baseDir
-global subj_code
+function ViewSUV3D(filename, sub_info)
 
 %VIEWSUV3D Summary of this function goes here
 %   Detailed explanation goes here
@@ -72,7 +69,7 @@ test(test>255) = 255;
 test = imresize(test, 2.2);
 %Save image
 
-imgname=strcat('wSUV_',subj_code,'.png');
+imgname=strcat('wSUV_',sub_info.code,'.png');
 imwrite(test, map, imgname)
 
 end

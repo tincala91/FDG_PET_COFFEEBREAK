@@ -1,3 +1,5 @@
+function I_SUV_GM_script(dir_path, sub_info)
+
 % -------------------------------------------------------------------------
 % BATCH PET Data processing - MB - 24/01/2013
 % Collaboration with COMA group
@@ -21,14 +23,12 @@
 % -------------------------------------------------------------------------
 
 %declaring useful variables
-global baseDir
-global subj_code
-global dir_path
+global TEMPLATE_DIR
 
 cd(fullfile(dir_path, 'SUV'))
 %dir_dicom=pwd;
-normImg=fullfile(strcat(dir_path,'/','SUV/wSUV_',subj_code,'.nii'));
-ROI_file = fullfile(baseDir,'MASK_TEMPLATES_HC/MNI_grey_Mask.nii');
+normImg=fullfile(strcat(dir_path,'/','SUV/wSUV_',sub_info.code,'.nii'));
+ROI_file = fullfile(TEMPLATE_DIR,'MNI_grey_Mask.nii');
 
 %[ROI_file,status] = spm_select(1, 'image', 'Select the Grey matter mask ', [], pwd); %% spm
 
@@ -64,12 +64,10 @@ spm pet
 % % ----------------------------
 % % Run Part one of the batch
 % % ----------------------------
-
     spm('Pointer','Watch');
     save('pet_norm_process_coma1.mat','matlabbatch');
     spm('Pointer');
 	spm_jobman('serial',matlabbatch);
-
 	clear matlabbatch;
     job = 0;    
 
@@ -133,6 +131,6 @@ SUV_info=table(FileName,MeanSUV,SDSUV,MeanSUV_HC,SDSUV_HC,Mean_Perc_vs_HC,SD_Per
 writetable(SUV_info,'SUV_info.xlsx');
 
 filename=normImg;
-ViewSUV3D(filename);
-
+ViewSUV3D(filename, sub_info);
+print('1')
 cd .. 

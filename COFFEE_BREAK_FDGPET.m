@@ -42,7 +42,6 @@ full_path = mfilename('fullpath');
 
 cur_path = pwd();
 
-
 JOB_DIR = fullfile(baseDir, 'JOB_FILES'); 
 TEMPLATE_DIR = fullfile(baseDir, 'MASK_TEMPLATES_HC'); 
 ROI_DIR = fullfile(baseDir, 'ROIs');
@@ -54,7 +53,7 @@ addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 %selects the directory containing only dicoms 
 dir_path = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
 
-% dir_path = '/home/beliy/Works/COFFEE_BREAK_FDGPET/data/patients_images_dicom_fully_anonymized/FDGPET_PATIENT1';
+%dir_path = '/home/andreas/Work/UKA/SPM_2022/SPM/Test';
 
 try 
 
@@ -141,16 +140,16 @@ try
 
   if sub_info.correct_unit
       %compute SUV image;
-      G_SUV_WRITE;
+      G_SUV_WRITE(dir_path, sub_info);
 
       %normalizes image to template and smooths
-      H_NORMA_script;
+      H_NORMA_script(dir_path, sub_info);
 
       %extract mean SUV in the GM of the wSUV image
       %saves SUV information and computes mean SUV decrease (compared to
       %controls)
       %creates render in MRIcron style
-      I_SUV_GM_script;
+      I_SUV_GM_script(dir_path, sub_info);
   end
 
 catch ME

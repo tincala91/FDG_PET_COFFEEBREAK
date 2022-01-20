@@ -41,8 +41,8 @@ function F_percent(data, mask, rois, template_table, start_row, start_col)
 
   try
     range = sprintf('%s%d:%s%d', start_col, start_row, ...
-                    start_col + size(Counts, 2) - 1, ...
-                    start_row + size(Counts, 1) - 1)
+                    start_col + size(counts, 2) - 1, ...
+                    start_row + size(counts, 1) - 1)
     writematrix(counts, res_table, 'Range', range);
   catch
     warning('Failed to write excel file, trying tsv');
