@@ -271,12 +271,16 @@ for j=1:length(dat)
             % Generate an image of the integral of the blob values.
             %--------------------------------------------------------------
             xyz = xyz(:,msk);
-            if ~isfinite(brt), t0  = t(msk);
-            else
+            % Applied depth correction to both old and new rendered
+            % correction is a hard cut
+            depth_cut = 1.0;
+            %if ~isfinite(brt), t0  = t(msk);
+            %else
                 dst = xyz(3,:) - z1(msk);
                 dst = max(dst,0);
-                t0  = t(msk).*exp((log(0.5)/10)*dst);
-            end
+                %t0  = t(msk).*exp((log(0.1)/5)*dst);
+                t0  = t(msk).*(dst < depth_cut);
+            %end
             X0  = full(sparse(round(xyz(1,:)), round(xyz(2,:)), t0, d2(1), d2(2)));
             hld = 1; if ~isfinite(brt), hld = 0; end
             X   = spm_slice_vol(X0,spm_matrix([0 0 1])*M2,size(rend{i}.dep),hld);
@@ -362,7 +366,6 @@ else
 
         rgb{i} = zeros([size(ren) 3]);
         tmp = ren.*max(1-X{1}-X{2}-X{3},0);
-        col
         for k = 1:3
             rgb{i}(:,:,k) = tmp + X{1}*col(1,k) + X{2}*col(2,k) +X{3}*col(3,k);
         end
