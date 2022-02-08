@@ -121,7 +121,7 @@ function sub_info = get_sub_info(fname)
   weight = info.PatientWeight;
   Dose=info.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose;
   HeureMesure=str2double(info.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime);
-  HeureExam=str2double(info.SeriesTime);
+  HeureExam=str2double(info.AcquisitionTime);
 
   if info.RescaleIntercept~=0
       fprintf('RescaleItercept == %f; not null', info.RescaleIntercept)

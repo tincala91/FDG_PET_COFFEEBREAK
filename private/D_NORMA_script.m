@@ -1,7 +1,10 @@
 function files = D_NORMA_script(files, template)
   global JOB_DIR
-
   files = cellstr(files);
+  [pth,~,~] = fileparts(files{1});
+  cur_dir = pwd()
+
+  cd(pth)
 
   nrun = 1; % enter the number of runs here
   jobfile = fullfile(JOB_DIR, 'NORMA_script_job.m');
@@ -21,8 +24,11 @@ function files = D_NORMA_script(files, template)
     % Need to be carefull if prefix 'sw' is not garanteed
     files{iFile} = fullfile(path, ['sw' basename, ext]);
     if ~exist(files{iFile}, 'file')
-      error('expected normalized file %s not found. Probably wron prefix', ...
+      error('expected normalized file %s not found. Probably wrong prefix', ...
             files{iFile});
     end
   end
+
+  cd(cur_dir)
+
 end

@@ -22,10 +22,12 @@ function files = E_STAT_script_addon(spm_mat_file, render, template)
   cd(pth);
   export_fig 'Pres.jpg'
 
-  spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM), 1, render, 0);
+  %spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM), 1, render, 0);
+  spm_render_DOC(get_renderer(xSPM), 1, render, 0);
   export_fig 'Render_pres_new.jpg'; %saves render as jpeg (get current figure!)
 
-  spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM), nan, render);
+  %spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM), nan, render);
+  spm_render_DOC(get_renderer(xSPM), nan, render);
   export_fig 'Render_pres_old.jpg'
 
   hypo_nii = 'spmT_0001_Hypo.nii';
