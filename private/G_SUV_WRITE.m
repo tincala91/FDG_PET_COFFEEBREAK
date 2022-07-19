@@ -24,8 +24,7 @@ spm_jobman('run', jobs, inputs{:});
 
 SUVfile = fullfile(dir_path,'SPM','SUV.nii');
 renamedSUVfile=strcat(dir_path,'/','SPM','/','SUV_',sub_info.code,'.nii');
-copyfile(SUVfile, renamedSUVfile);
-delete(SUVfile);
+movefile(SUVfile, renamedSUVfile);
 cd(dir_path)
 mkdir SUV;
 movefile (renamedSUVfile, 'SUV'); 

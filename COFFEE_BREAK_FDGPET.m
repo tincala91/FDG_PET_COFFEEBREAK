@@ -149,7 +149,10 @@ try
       %saves SUV information and computes mean SUV decrease (compared to
       %controls)
       %creates render in MRIcron style
-      I_SUV_GM_script(dir_path, sub_info);
+      sub_info = I_SUV_GM_script(dir_path, sub_info);
+      
+      K_Create_Report(dir_path, sub_info);  
+     
   end
 
 catch ME

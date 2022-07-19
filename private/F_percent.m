@@ -37,11 +37,14 @@ function F_percent(data, mask, rois, template_table, start_row, start_col)
   
   [~, basename, ext] = fileparts(template_table);
   res_table = fullfile(data_path, [basename, ext]);
+  
   copyfile(template_table, res_table);
+  %cmd = ['cp ', template_table, res_table];
+  %system(cmd);
 
   try
     range = sprintf('%s%d:%s%d', start_col, start_row, ...
-                    start_col + size(Counts, 2) - 1, ...
+                    start_col + size(counts, 2) - 1, ...
                     start_row + size(counts, 1) - 1);
     writematrix(counts, res_table, 'Range', range);
   catch

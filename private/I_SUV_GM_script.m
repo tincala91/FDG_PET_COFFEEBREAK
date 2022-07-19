@@ -1,4 +1,4 @@
-function I_SUV_GM_script(dir_path, sub_info)
+function sub_info = I_SUV_GM_script(dir_path, sub_info)
 
 % -------------------------------------------------------------------------
 % BATCH PET Data processing - MB - 24/01/2013
@@ -127,10 +127,11 @@ Mean_Dim_Perc_vs_HC=convertCharsToStrings(100-((value/7.8818397)*100));
 SD_Dim_Perc_vs_HC=convertCharsToStrings(100-((stdev/1.9006524)*100));
 
 SUV_info=table(FileName,MeanSUV,SDSUV,MeanSUV_HC,SDSUV_HC,Mean_Perc_vs_HC,SD_Perc_vs_HC,Mean_Dim_Perc_vs_HC,SD_Dim_Perc_vs_HC);
-
+sub_info.meandim = Mean_Dim_Perc_vs_HC;
 writetable(SUV_info,'SUV_info.xlsx');
 
 filename=normImg;
 ViewSUV3D(filename, sub_info);
-print('1')
+%print('1')
 cd .. 
+end
