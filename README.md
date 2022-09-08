@@ -18,13 +18,13 @@ An overview of the pipeline is available below
 
 [Matlab](https://nl.mathworks.com/products/matlab.html?s_tid=hp_ff_p_matlab) and [SPM](https://www.fil.ion.ucl.ac.uk/spm/software/download/) need to be installed before this pipeline can be run. The minimum requirements are Matlab 2017b and SPM12. Note that SPM12 can be installed only *after* installation of Matlab (see [instructions](https://en.wikibooks.org/wiki/SPM/Installation_on_Windows))
 
-To setup the pipeline, the user should download all files and folders in this [GitHub repository](https://github.com/GIGA-Consciousness/COFFEE_BREAK_FDGPET); next, a Data folder containing the nifti files of 33 healthy controls, used for comparison in the analyses, should be downloaded separately by the user ([here](https://search.kg.ebrains.eu/instances/Dataset/68a61eab-7ba9-47cf-be78-b9addd64bb2f)) and placed into the COFFEE_BREAK_FDGPET folder.
+To setup the pipeline, the user should download all files and folders in this [GitHub repository](https://github.com/GIGA-Consciousness/COFFEE_BREAK_FDGPET); next, a Data folder containing the nifti files of 33 healthy controls, used for comparison in the analyses, should be downloaded from [EBRAINS](https://search.kg.ebrains.eu/instances/Dataset/68a61eab-7ba9-47cf-be78-b9addd64bb2f) by the user and placed into the COFFEE_BREAK_FDGPET folder.
 
 
 
 ## Running the pipeline
 
-To run, the pipeline only requires the user to provide the DICOM files of the [18F]FDG-PET exam of the patient as input. 
+To run, the pipeline only requires the user to provide the DICOM files of the [18F]FDG-PET scan of the patient as input. 
 
 To do so, the user should:
 1) open Matlab
@@ -46,9 +46,8 @@ The processed image is statistically compared to a reference group of 33 healthy
 ## Using the outputs
 
 The pipeline produces a series of outputs of interest, saved within the patient's folder provided by the user:
-1) voxel-based maps of relative hypometabolism and preserved metabolism, based on standardized uptake value ratio (SUVr, with global mean scaling) 
-2) decrease in the patient’s global brain glucose metabolism, based on SUV
-3) summary statistics and graphical renderings to aid clinical interpretation 
+1) voxel-based maps of relative hypometabolism and preserved metabolism, based on standardized uptake value ratio (SUVr, with global mean scaling), plus summary statistics and graphical renderings to aid clinical interpretation 
+2) decrease in the patient’s global brain glucose metabolism, based on SUV, including graphical renderings to aid clinical interpretation 
 
 All outputs are saved into the original patient's folder. 
 The voxel-based maps of relative hypometabolism and preserved metabolism (nifti format), their graphical renders (image format) and summary statistics (excel or tsv format) are saved into the *SPM* subfolder.
