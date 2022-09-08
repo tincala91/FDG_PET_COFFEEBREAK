@@ -24,7 +24,7 @@ To setup the pipeline, the user should download all files and folders in this [G
 
 ## Running the pipeline
 
-To run, the pipeline only requires the user to provide the DICOM files of the [18F]FDG-PET exam of the patient as input. 
+To run, the pipeline only requires the user to provide the DICOM files of the [18F]FDG-PET scan of the patient as input. 
 
 To do so, the user should:
 1) open Matlab
@@ -46,9 +46,8 @@ The processed image is statistically compared to a reference group of 33 healthy
 ## Using the outputs
 
 The pipeline produces a series of outputs of interest, saved within the patient's folder provided by the user:
-1) voxel-based maps of relative hypometabolism and preserved metabolism, based on standardized uptake value ratio (SUVr, with global mean scaling) 
-2) decrease in the patient’s global brain glucose metabolism, based on SUV
-3) summary statistics and graphical renderings to aid clinical interpretation 
+1) voxel-based maps of relative hypometabolism and preserved metabolism, based on standardized uptake value ratio (SUVr, with global mean scaling), plus summary statistics and graphical renderings to aid clinical interpretation 
+2) decrease in the patient’s global brain glucose metabolism, based on SUV, including graphical renderings to aid clinical interpretation 
 
 All outputs are saved into the original patient's folder. 
 The voxel-based maps of relative hypometabolism and preserved metabolism (nifti format), their graphical renders (image format) and summary statistics (excel or tsv format) are saved into the *SPM* subfolder.
