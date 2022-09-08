@@ -18,7 +18,7 @@ An overview of the pipeline is available below
 
 [Matlab](https://nl.mathworks.com/products/matlab.html?s_tid=hp_ff_p_matlab) and [SPM](https://www.fil.ion.ucl.ac.uk/spm/software/download/) need to be installed before this pipeline can be run. The minimum requirements are Matlab 2017b and SPM12. Note that SPM12 can be installed only *after* installation of Matlab (see [instructions](https://en.wikibooks.org/wiki/SPM/Installation_on_Windows))
 
-To setup the pipeline, the user should download all files and folders in this [GitHub repository](https://github.com/GIGA-Consciousness/COFFEE_BREAK_FDGPET); next, a Data folder containing the nifti files of 33 healthy controls, used for comparison in the analyses, should be downloaded separately by the user ([here](https://search.kg.ebrains.eu/instances/Dataset/68a61eab-7ba9-47cf-be78-b9addd64bb2f)) and placed into the COFFEE_BREAK_FDGPET folder.
+To setup the pipeline, the user should download all files and folders in this [GitHub repository](https://github.com/GIGA-Consciousness/COFFEE_BREAK_FDGPET); next, a Data folder containing the nifti files of 33 healthy controls, used for comparison in the analyses, should be downloaded from [EBRAINS](https://search.kg.ebrains.eu/instances/Dataset/68a61eab-7ba9-47cf-be78-b9addd64bb2f) by the user and placed into the COFFEE_BREAK_FDGPET folder.
 
 
 
