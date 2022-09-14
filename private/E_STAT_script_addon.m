@@ -36,9 +36,9 @@ function files = E_STAT_script_addon(spm_mat_file, render, template)
   %inputs should be char, but not possible to concatenate chars of different
   %length; creating a matrix containing cells first, and then converting to
   %char
-  images={template; hypo_nii; pres_nii};
-  slover_singlesubj_DOC_ax(char(images));
 
+  SaveAxialPlot(template, hypo_nii, pres_nii);
+  
   cd(cur_dir);
 
 end
