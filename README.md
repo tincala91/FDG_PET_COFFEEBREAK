@@ -1,4 +1,4 @@
-# FDG\_PET\_COFFEEBREAK
+# DOC_TOOLBOX
 
 We provide an automated, fast, user-friendly and free-to-use (open-source GPL2) Statistical Parametric Mapping (SPM) pipeline, written in MATLAB, for tha analysis of [18F]FDG-PET images in patients with disorders of consciousness. The pipeline is based on validated analytical procedures ([Bruno et al., 2012](https://pubmed.ncbi.nlm.nih.gov/22081100/); [Thibaut et al., 2012](https://pubmed.ncbi.nlm.nih.gov/22366927/); [Thibaut et al., 2021](https://pubmed.ncbi.nlm.nih.gov/33938027/)) routinely used at the [Coma Science Group](https://www.coma.uliege.be/) and [Centre du Cerveau2](https://www.chuliege.be/jcms/c2_18822094/fr/centre-du-cerveau/accueil), Liège, Belgium.
 
