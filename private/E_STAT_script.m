@@ -1,7 +1,6 @@
 function mat_file = E_STAT_script(files, render, mask, controls)
   %declaring useful variables
   global JOB_DIR
-  global xSPM
 
   files = cellstr(files);
   controls = cellstr(controls);
@@ -31,12 +30,12 @@ function mat_file = E_STAT_script(files, render, mask, controls)
   export_fig 'Hypo.jpg';
   
   %spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),1,render,1)
-  spm_render_DOC(get_renderer(xSPM),1,render,1)
+  spm_render_DOC(get_renderer(),1,render,1);
   %saveas(gcf, 'Render_hypo_new.jpg');
   export_fig 'Render_hypo_new.jpg';
 
   %spm_render_DOC(struct('XYZ', xSPM.XYZ, 't',xSPM.Z,'mat', xSPM.M,'dim', xSPM.DIM),nan,render)
-  spm_render_DOC(get_renderer(xSPM),nan,render)
+  spm_render_DOC(get_renderer(),nan,render);
   spm_figure('colormap','gray-cool');
   %saveas(gcf, 'Render_hypo_old.jpg');
   export_fig 'Render_hypo_old.jpg';
