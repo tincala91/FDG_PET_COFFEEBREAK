@@ -50,6 +50,9 @@ addpath(fullfile(baseDir, 'OTHER_FUNCTIONS'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
 addpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
 
+% Initialize plugins
+%plugins.init()
+
 %selects the directory containing only dicoms 
 dir_path = spm_select(1,'dir', 'Select directory where DICOM files are'); %% input directory
 
@@ -151,7 +154,7 @@ try
       %creates render in MRIcron style
       sub_info = I_SUV_GM_script(dir_path, sub_info);
       
-      K_Create_Report(dir_path, sub_info);  
+      % plugins.run('K', dir_path, sub_info);
      
   end
 
@@ -160,7 +163,7 @@ catch ME
   rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'TFCE'));
   rmpath(fullfile(baseDir, 'OTHER_FUNCTIONS', 'export_fig-master'));
   cd(cur_path);
-  save('workspace_dump.m');
+  save('workspace_dump.mat');
   rethrow(ME);
 end
 
