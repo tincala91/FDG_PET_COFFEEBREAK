@@ -5,7 +5,8 @@ function ViewSUV3D(filename, sub_info)
 
 %filename = 'wSUV_ScCh_19591229_20210510.nii'
 %Load image
-img_SUV = double(load_nii(filename).img);
+nii = load_nii(filename);
+img_SUV = double(nii.img);
 
 %Get image shape
 [xdim, ydim, zdim] = size(img_SUV);
