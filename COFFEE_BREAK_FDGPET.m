@@ -154,7 +154,7 @@ try
       %creates render in MRIcron style
       sub_info = I_SUV_GM_script(dir_path, sub_info);
       
-      % plugins.run('K', dir_path, sub_info);
+      run_plugin('K', dir_path, sub_info);
      
   end
 
